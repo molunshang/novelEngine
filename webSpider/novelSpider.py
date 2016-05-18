@@ -2,6 +2,7 @@ import os;
 import re;
 import asyncio;
 import time;
+import link;
 from AsyncBaseSpider.spider import spider;
 from AsyncBaseSpider.redisQueue import redisQueue;
 from setting import *;
@@ -9,17 +10,12 @@ from novelConfig import configs;
 
 
 class novelSpider(spider):
-    def __init__(self):
-        queue = redisQueue("linkQueue");
-        queue.enqueue({"link": "http://www.23wx.com", "host": "http://www.23wx.com", "linktype": 1});
-        queue.enqueue({"link": "http://www.7dsw.com", "host": "http://www.7dsw.com", "linktype": 1});
-        queue.enqueue({"link": "http://www.bxwx.org", "host": "http://www.bxwx.org", "linktype": 1});
+    def __init__(self, link):
+        queue = redisQueue("linkQueue_" + link.host);
+        queue.enqueue({"link": link.link, "host": link.host, "linktype": link.type});
         spider.__init__(self, queue, os.cpu_count());
         self.historyName = time.strftime('%y-%m-%d', time.localtime(time.time()));
-        self.bookDict = dict();
-        cursor = syncClient["book"].Book.find();
-        for book in cursor:
-            self.bookDict[book["BookName"]] = {"bookId": book["_id"], "icon": book["Icon"]};
+        self.bookDict = globalBookDict;
 
     def filter(self, item):
         return redisClient.sismember(self.historyName, item);
@@ -185,7 +181,10 @@ class novelSpider(spider):
 
 if __name__ == "__main__":
     now = time.strftime('%y-%m-%d', time.localtime(time.time()));
-    novelSpider = novelSpider();
-    novelSpider.run();
-    for key in configs:
-        redisClient.set(key + "_lastTime", now);
+    tasks = [];
+    for k in configs:
+        reader = novelSpider(link.link(k, 1, k));
+        tasks.append(reader.runAsync());
+    asyncio.get_event_loop().run_until_complete(asyncio.wait(tasks));
+    for k in configs:
+        redisClient.set(k + "_lastTime", now);
