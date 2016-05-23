@@ -54,7 +54,5 @@ class spider(object):
         tasks = [self.craw() for i in range(self.concurrent)];
         self.loop.run_until_complete(asyncio.wait(tasks));
 
-    @asyncio.coroutine
     def runAsync(self):
-        tasks = [self.craw() for i in range(self.concurrent)];
-        return asyncio.wait(tasks);
+        return [self.craw() for i in range(self.concurrent)];

@@ -38,5 +38,35 @@ configs = {"http://www.23wx.com": {
         "lastTime": "00-00-00",
         "icon": "http://www.bxwx.org/image/\d+/\d+/.+?\.jpg",
         "itemSort": True
+    },
+    "http://www.sqsxs.com/": {
+        "encoding": "gbk",
+        "list": {
+            "regex": "http://www\.sqsxs\.com/sort\d+/\d+\.html|/quanben/\d*|/toplastupdate/\d+\.html",
+            "type": 1},
+        "detail": {"regex": "http://www.sqsxs.com/book/\d+/\d+/", "type": 3},
+        "detailList": {"regex": "http://www.sqsxs.com/book/\d+/\d+/", "type": 3},
+        "title": "<h1>(.+)?</h1>",
+        "author": "<i>作者：(.+)?</i>",
+        "detailItem": "<a href=\"(\d+.html)\" title=\"(.+)?\">",
+        "time": "<span class=\"s5\">(\d+-\d+-\d+)</span>",
+        "lastTime": "00-00-00",
+        "icon": "http://www.sqsxs.com/files/article/image/\d+/\d+/.+?\.jpg",
+        "itemSort": False
+    },
+    "http://www.aszw520.com/": {
+        "encoding": "gbk",
+        "list": {
+            "regex": "/toplastupdate/\d+\.html",
+            "type": 1},
+        "detail": {"regex": "http://www.aszw520.com/book/\d+/\d+/", "type": 3},
+        "detailList": {"regex": "http://www.aszw520.com/book/\d+/\d+/", "type": 3},
+        "title": "<h1>(.+)?</h1>",
+        "author": "<i>作者：(.+)?</i>",
+        "detailItem": "<a href=\"(\d+.html)\">(.+?)</a>",
+        "time": "<td class=\"C\">\d+-\d+-\d+</td>",
+        "lastTime": "00-00-00",
+        "icon": "http://www.aszw520.com/files/article/image/\d+/\d+/.+?\.jpg",
+        "itemSort": False
     }
 };

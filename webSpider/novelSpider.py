@@ -10,10 +10,12 @@ from novelConfig import configs;
 
 
 class novelSpider(spider):
-    def __init__(self, link):
+    def __init__(self, link, loop=None):
         queue = redisQueue("linkQueue_" + link.host);
         queue.enqueue({"link": link.link, "host": link.host, "linktype": link.type});
-        spider.__init__(self, queue, os.cpu_count());
+        if loop is None:
+            loop = asyncio.get_event_loop();
+        spider.__init__(self, queue, os.cpu_count(), loop);
         self.historyName = time.strftime('%y-%m-%d', time.localtime(time.time()));
         self.bookDict = globalBookDict;
 
@@ -180,11 +182,13 @@ class novelSpider(spider):
 
 
 if __name__ == "__main__":
+    loop = asyncio.get_event_loop();
     now = time.strftime('%y-%m-%d', time.localtime(time.time()));
     tasks = [];
     for k in configs:
-        reader = novelSpider(link.link(k, 1, k));
-        tasks.append(reader.runAsync());
-    asyncio.get_event_loop().run_until_complete(asyncio.wait(tasks));
+        reader = novelSpider(link.link(k, 1, k), loop);
+        for t in reader.runAsync():
+            tasks.append(t)
+    loop.run_until_complete(asyncio.wait(tasks));
     for k in configs:
         redisClient.set(k + "_lastTime", now);
