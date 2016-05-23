@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav">
+			<div class="mui-input-row mui-search">
+				<input id="search" type="search" class="mui-input-clear" placeholder="">
+			</div>
+		</header>
+		<div class="mui-content"></div>
+	</body>
+	<script type="text/javascript">
+		//启用双击监听
+		mui.init({
+			gestureConfig: {
+				doubletap: true
+			},
+			subpages: [{
+				url: 'list.html',
+				id: 'list.html',
+				styles: {
+					top: '45px',
+					bottom: '0px',
+				}
+			}]
+		});
+		var searchView = null;
+		mui("#header").on("focusin", "input", function() {
+			if (!searchView) {
+				searchView = plus.webview.create("search.html");
+				searchView.addEventListener("loaded", function() { //注册新webview的载入完成事件
+					searchView.show("slide-in-right", 50);
+				}, false);
+			} else {
+				plus.webview.currentWebview().hide();
+				searchView.loadURL("search.html");
+				searchView.show();
+			}
+		});
+	</script>
+</html>
