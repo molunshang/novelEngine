@@ -213,6 +213,7 @@ class novelSpider(spider):
 def runSpider(link):
     reader = novelSpider(link);
     reader.run();
+	now = time.strftime('%y-%m-%d', time.localtime(time.time()));
     redisClient.set("lastTime_" + link.host, now);
 
 
@@ -227,7 +228,6 @@ if __name__ == "__main__":
     # loop.run_until_complete(asyncio.wait(tasks));
     # for k in configs:
     #     redisClient.set(k + "_lastTime", now);
-    now = time.strftime('%y-%m-%d', time.localtime(time.time()));
     jobs = [];
     for k in configs:
         l = link.link(k, 1, k);
