@@ -1,7 +1,5 @@
-import os;
-import re;
-import asyncio;
-import time;
+import os, re, asyncio, time;
+from multiprocessing import Queue, Process;
 import link;
 from AsyncBaseSpider.spider import spider;
 from AsyncBaseSpider.redisQueue import redisQueue;
@@ -16,8 +14,32 @@ class novelSpider(spider):
         if loop is None:
             loop = asyncio.get_event_loop();
         spider.__init__(self, queue, os.cpu_count(), loop);
+        self.redisClient = redis.Redis(connection_pool=redisPool);
         self.historyName = time.strftime('%y-%m-%d', time.localtime(time.time()));
         self.bookDict = globalBookDict;
+
+    # @staticmethod
+    # def beginTransaction():
+    #     client=redis.Redis(connection_pool=redisPool);
+    #     tranName = "currentTransaction";
+    #     tran = client.get(tranName);
+    #     if tran is None:
+    #         with client.pipeline() as pipe:
+    #             try:
+    #                 pipe.watch(tranName)
+    #                 tranVersion = pipe.incr(tranName + "_version");
+    #                 pipe.multi()
+    #                 pipe.set(tranName, tranVersion)
+    #                 pipe.execute()
+    #                 return tranVersion;
+    #             except redis.WatchError as e:
+    #                 return client.get(tranName);
+    #     else:
+    #         return tran;
+    #
+    # def closeTransaction(self):
+    #     tranName = "queueTran_" + self.queue.queueName;
+    #     self.redisClient.delete(tranName);
 
     def filter(self, item):
         return redisClient.sismember(self.historyName, item);
@@ -42,6 +64,13 @@ class novelSpider(spider):
             yield from self.parseArticle(html, config, host, link);
         print("抓取链接%s,类型%s" % (link, str(linkType)));
 
+    # @asyncio.coroutine
+    # def craw(self):
+    #     tran = self.beginTransaction();
+    #     self.historyName = self.historyName + "_" + int(tran);
+    #     yield from super().craw();
+    #     self.closeTransaction();
+
     @asyncio.coroutine
     def parseLink(self, html, config, host, link):
         '''
@@ -53,7 +82,7 @@ class novelSpider(spider):
         linkType = regItem["type"];
         links = re.findall(reg, html);
         times = re.findall(time, html);
-        lastTime = redisClient.get(host + "_lastTime");
+        lastTime = redisClient.get("lastTime_" + host);
         if not lastTime:
             lastTime = config["lastTime"];
         elif not isinstance(lastTime, str):
@@ -181,14 +210,29 @@ class novelSpider(spider):
         return title, info;
 
 
+def runSpider(link):
+    reader = novelSpider(link);
+    reader.run();
+    redisClient.set("lastTime_" + link.host, now);
+
+
 if __name__ == "__main__":
-    loop = asyncio.get_event_loop();
+    # loop = asyncio.get_event_loop();
+    # now = time.strftime('%y-%m-%d', time.localtime(time.time()));
+    # tasks = [];
+    # for k in configs:
+    #     reader = novelSpider(link.link(k, 1, k), loop);
+    #     for t in reader.runAsync():
+    #         tasks.append(t)
+    # loop.run_until_complete(asyncio.wait(tasks));
+    # for k in configs:
+    #     redisClient.set(k + "_lastTime", now);
     now = time.strftime('%y-%m-%d', time.localtime(time.time()));
-    tasks = [];
+    jobs = [];
     for k in configs:
-        reader = novelSpider(link.link(k, 1, k), loop);
-        for t in reader.runAsync():
-            tasks.append(t)
-    loop.run_until_complete(asyncio.wait(tasks));
-    for k in configs:
-        redisClient.set(k + "_lastTime", now);
+        l = link.link(k, 1, k);
+        p = Process(target=runSpider, args=(l,));
+        jobs.append(p);
+        p.start();
+    for p in jobs:
+        p.join();

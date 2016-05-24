@@ -10,3 +10,7 @@ class spiderQueue(object):
 
     def count(self):
         return 0;
+
+    @property
+    def queueName(self):
+        return None;
