@@ -1,8 +1,9 @@
-from flask import Flask;
-from flask import jsonify;
+from flask import *;
+from flask_bootstrap import Bootstrap;
 from pymongo import mongo_client;
 
 app = Flask(__name__)
+Bootstrap(app);
 client = mongo_client.MongoClient(host='127.0.0.1', port=27017);
 bookDb = client["book"];
 
@@ -31,6 +32,11 @@ def detail(bookId):
     return jsonify(isok=True, data=toArray(cursor));
 
 
+@app.route('/')
+def hello():
+    return render_template("hello.html");
+
+
 def toArray(cursor):
     result = [];
     try:
@@ -41,6 +47,6 @@ def toArray(cursor):
         print(e);
     return result;
 
-
 if __name__ == '__main__':
-    app.run(host='192.168.1.78')
+    app.debug = True;
+    app.run(host='0.0.0.0')
