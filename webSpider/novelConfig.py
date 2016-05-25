@@ -7,7 +7,7 @@ configs = {"http://www.23wx.com": {
     "author": "<h3>.+?作者：(.+?)</h3>|<th>文章作者</th><td>&nbsp;(.+?)</td>",
     "detailItem": "<a href=\"(\d+.html)\">(.+?)</a>",
     "time": "<td class=\"C\">(\d+-\d+-\d+)</td>",
-    "lastTime": "16-04-26",
+    "lastTime": "00-00-00",
     "icon": "http://www.23wx.com/files/article/image/\d+/\d+/.+?\.jpg",
     "itemSort": False
 },
@@ -20,7 +20,7 @@ configs = {"http://www.23wx.com": {
         "author": "<i>作者：(.+)?</i>",
         "detailItem": "<a href=\"(\d+.html)\" title=\"(.+)?\">",
         "time": "<span class=\"s5\">(\d+-\d+-\d+)</span>",
-        "lastTime": "16-04-26",
+        "lastTime": "00-00-00",
         "icon": "http://www.7dsw.com/files/article/image/\d+/\d+/.+?\.jpg",
         "itemSort": False
     },

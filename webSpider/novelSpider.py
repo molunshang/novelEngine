@@ -1,5 +1,5 @@
 import os, re, asyncio, time;
-from multiprocessing import Queue, Process;
+from multiprocessing import Pool, Process;
 import link;
 from AsyncBaseSpider.spider import spider;
 from AsyncBaseSpider.redisQueue import redisQueue;
@@ -144,9 +144,7 @@ class novelSpider(spider):
             yield from client["book"].BookLinks.update({"BookId": bookId, "LinkName": li["name"]},
                                                        {"$addToSet": {
                                                            "Links": self.convertLink(host, li["link"], link, 3)},
-                                                           # link + li["link"]
-                                                           "$set": {"Num": order},
-                                                           "$setOnInsert": {"time": time.time()}},
+                                                           "$setOnInsert": {"Time": time.time(), "Num": order}},
                                                        True);
             order = order + 1;
         print("获取小说%s,编号：%d,章节数%d" % (info[0], bookId, order));
@@ -213,26 +211,11 @@ class novelSpider(spider):
 def runSpider(link):
     reader = novelSpider(link);
     reader.run();
-	now = time.strftime('%y-%m-%d', time.localtime(time.time()));
+    now = time.strftime('%y-%m-%d', time.localtime(time.time()));
     redisClient.set("lastTime_" + link.host, now);
 
 
 if __name__ == "__main__":
-    # loop = asyncio.get_event_loop();
-    # now = time.strftime('%y-%m-%d', time.localtime(time.time()));
-    # tasks = [];
-    # for k in configs:
-    #     reader = novelSpider(link.link(k, 1, k), loop);
-    #     for t in reader.runAsync():
-    #         tasks.append(t)
-    # loop.run_until_complete(asyncio.wait(tasks));
-    # for k in configs:
-    #     redisClient.set(k + "_lastTime", now);
-    jobs = [];
-    for k in configs:
-        l = link.link(k, 1, k);
-        p = Process(target=runSpider, args=(l,));
-        jobs.append(p);
-        p.start();
-    for p in jobs:
-        p.join();
+    poolSize = min(len(configs), os.cpu_count());
+    with Pool(processes=poolSize) as p:
+        p.map(runSpider, [link.link(k, 1, k) for k in configs]);
