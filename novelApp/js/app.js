@@ -27,7 +27,7 @@ var api = {
 		var worker = new workItem();
 		if (index <= 0)
 			index = 1;
-		var link = config.host + "/list/" + index;
+		var link = "1.json"; //config.host + "/list/" + index;
 		mui.getJSON(link, null, function(data) {
 			worker.setResult(data);
 		});
@@ -46,5 +46,29 @@ var api = {
 			worker.setResult(data);
 		});
 		return worker;
+	},
+	getLocalBooks: function() {
+		var worker = new workItem();
+		console.log("books_local");
+		html5sql.process("select * from books", function(transaction, results) {
+			for (var i = 0; i < results.rows.length; i++) {
+				var row = results.rows[i];
+				console.log(row);
+			}
+		});
+	},
+	addToLocal: function(book) {
+		var sql = "INSERT OR IGNORE INTO books(bookId, name,author,isLocal,icon,lastReadTime,hasNew) VALUES (?,?,?,?,?,?,?)";
+		html5sql.process([{
+			"sql": sql,
+			"data": [book.BookId, book.BookName, book.Author, book.IsLocal, book.Icon, new Date(), 0],
+			"success": function(transaction, results) {
+				console.log(arguments);
+			},
+		}], function() {
+			console.log("add ok" + arguments);
+		}, function() {
+			console.log("add fail" + arguments);
+		});
 	}
 };
