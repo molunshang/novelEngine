@@ -1,0 +1,39 @@
+{% extends "baseLayout.html" %}
+{% block title %}站点配置列表{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-12">
+            <section class="panel">
+                <div class="panel-body progress-panel">
+                    <div class="task-progress">
+                        <h1>抓取站点列表</h1>
+                    </div>
+                    <div class="task-option">
+                        <a href="/siteconfig/add" class="btn btn-success">添加</a>
+                    </div>
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>站点名称</th>
+                        <th>地址</th>
+                        <th>更新时间</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for site in sites %}
+                        <tr>
+                            <td>1</td>
+                            <td>{{ site.SiteName }}</td>
+                            <td>{{ site.SiteHost }}</td>
+                            <td>{{ site.LastTime }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+{% endblock %}

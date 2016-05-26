@@ -202,8 +202,6 @@ class novelSpider(spider):
         elif not info["icon"] and icon and len(icon) > 0:
             yield from client["book"].Book.update({"_id": info["bookId"]}, {"$set": {"Icon": icon}});
             info["icon"] = icon;
-        # else:
-        #     return title, info;
         self.bookDict[title] = info;
         return title, info;
 

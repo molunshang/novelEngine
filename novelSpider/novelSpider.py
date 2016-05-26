@@ -1,8 +1,10 @@
 from flask import *;
 from flask_bootstrap import Bootstrap;
 from pymongo import mongo_client;
+import forms;
 
 app = Flask(__name__)
+app.config["SECRET_KEY"] = "asdjflasdjfasdf31241234234ljks";
 Bootstrap(app);
 client = mongo_client.MongoClient(host='127.0.0.1', port=27017);
 bookDb = client["book"];
@@ -33,8 +35,28 @@ def detail(bookId):
 
 
 @app.route('/')
-def hello():
-    return render_template("hello.html");
+def index():
+    return render_template("index.html");
+
+
+@app.route('/siteconfig/list')
+def siteList():
+    configs = bookDb.siteConfigs.find();
+    return render_template("sitelist.html", sites=configs);
+
+
+@app.route('/siteconfig/add', methods=["get", "post"])
+def siteItem():
+    config = forms.siteConfigForm();
+    if request.method == "GET":
+        return render_template("siteItem.html", form=config);
+    if config.validate():
+        data = config.data;
+        data["_id"] = data["SiteHost"];
+        bookDb.siteConfigs.save(data);
+        return redirect(url_for("siteList"));
+
+    return redirect(url_for("siteItem"));
 
 
 def toArray(cursor):
@@ -46,6 +68,7 @@ def toArray(cursor):
     except Exception as e:
         print(e);
     return result;
+
 
 if __name__ == '__main__':
     app.debug = True;
