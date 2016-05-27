@@ -1,149 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="064b99a2-d855-4b08-a862-3b8df5f18ace" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/bootstrap-colorpicker/img/alpha.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/bootstrap-colorpicker/img/hue.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/bootstrap-colorpicker/img/saturation.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/font-awesome/font/fontawesome-webfontd41d.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/font-awesome/font/fontawesome-webfontf77b.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/font-awesome/font/fontawesome-webfontf77b.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/font-awesome/font/fontawesome-webfontf77b.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/gritter/images/gritter-light.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/gritter/images/gritter.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/gritter/images/ie-spacer.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-file-upload/img/loading.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-file-upload/img/progressbar.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-ui/images/animated-overlay.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-ui/images/ui-bg_diagonals-thick_18_b81900_40x40.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-ui/images/ui-bg_diagonals-thick_20_666666_40x40.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-ui/images/ui-bg_flat_10_000000_40x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-ui/images/ui-bg_glass_100_f6f6f6_1x400.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-ui/images/ui-bg_glass_100_fdf5ce_1x400.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-ui/images/ui-bg_glass_65_ffffff_1x400.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-ui/images/ui-bg_gloss-wave_35_f6a828_500x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-ui/images/ui-bg_highlight-soft_100_eeeeee_1x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-ui/images/ui-bg_highlight-soft_75_ffe45c_1x100.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-ui/images/ui-icons_222222_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-ui/images/ui-icons_228ef1_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-ui/images/ui-icons_ef8c08_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-ui/images/ui-icons_ffd27a_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-ui/images/ui-icons_ffffff_256x240.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/fonts/Descr.WD3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/fonts/glyphicons-halflings-regular.eot@" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/fonts/glyphicons-halflings-regulard41d.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/404_icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/500_icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/Descr.WD3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/arrow-up.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/avatar-mini.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/avatar-mini2.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/avatar-mini3.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/avatar-mini4.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/avatar1.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/avatar1_small.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/chart-texture.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/chat-avatar.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/chat-avatar2.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/checkbox/Descr.WD3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/checkbox/check-off.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/checkbox/check-on.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/checkbox/radio-off.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/checkbox/radio-on.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/customSelect-arrow.gif" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/follower-avatar.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/left-arrow.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/mail-avatar.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/mask.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/pro-ac-1.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/pro-ac-2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/product1.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/product2.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/product3.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/profile-avatar.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/right-arrow.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/ring.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/search-icon.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/sm-img-1.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/sm-img-2.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/sm-img-3.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/vector-lab.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/bootstrap-colorpicker/css/colorpicker.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/bootstrap-colorpicker/js/bootstrap-colorpicker.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/bootstrap-datepicker/css/datepicker.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/bootstrap-datepicker/js/bootstrap-datepicker.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/bootstrap-daterangepicker/date.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/bootstrap-daterangepicker/daterangepicker.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/bootstrap-daterangepicker/daterangepicker.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/chart-master/Chart.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/ckeditor/ckeditor.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/data-tables/DT_bootstrap.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/data-tables/jquery.dataTables.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/font-awesome/css/font-awesome.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/font-awesome/font/fontawesome-webfont.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/fullcalendar/fullcalendar/fullcalendar.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/gritter/css/jquery.gritter.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/gritter/js/jquery.gritter.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-file-upload/css/jquery.fileupload-ui.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-file-upload/js/jquery.fileupload-fp.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-file-upload/js/jquery.fileupload-ui.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-file-upload/js/jquery.fileupload.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-file-upload/js/jquery.iframe-transport.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-file-upload/js/vendor/canvas-to-blob.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-file-upload/js/vendor/jquery.ui.widget.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-file-upload/js/vendor/load-image.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-file-upload/js/vendor/tmpl.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-knob/js/jquery.knob.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-ui/jquery-ui-1.10.1.custom.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/jquery-ui/jquery-ui-1.10.1.custom.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/morris.js-0.4.3/morris.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/morris.js-0.4.3/morris.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/assets/morris.js-0.4.3/raphael-min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/css/bootstrap-reset.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/css/owl.carousel.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/css/style-responsive.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/css/style.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/img/favicon.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/js/all-chartjs.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/js/bootstrap-switch.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/js/common-scripts.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/js/dynamic-table.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/js/easy-pie-chart.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/js/external-dragging-calendar.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/js/form-component.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/js/form-validation-script.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/js/ga.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/js/gritter.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/js/jquery-1.8.3.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/js/jquery-ui-1.9.2.custom.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/js/jquery.customSelect.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/js/jquery.nicescroll.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/js/jquery.scrollTo.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/js/jquery.sparkline.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/js/jquery.stepy.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/js/jquery.tagsinput.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/js/jquery.validate.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/js/morris-script.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/js/owl.carousel.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/js/sliders.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/static/js/sparkline-chart.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../novelSpider/templates/baseLayout.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../novelSpider/static/fonts/glyphicons-halflings-regular.eot" afterPath="$PROJECT_DIR$/../novelSpider/static/fonts/glyphicons-halflings-regular.eot" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../novelSpider/static/fonts/glyphicons-halflings-regular.ttf" afterPath="$PROJECT_DIR$/../novelSpider/static/fonts/glyphicons-halflings-regular.ttf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../novelSpider/static/fonts/glyphicons-halflings-regular.woff" afterPath="$PROJECT_DIR$/../novelSpider/static/fonts/glyphicons-halflings-regular.woff" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../novelSpider/.idea/novelSpider.iml" afterPath="$PROJECT_DIR$/../novelSpider/.idea/novelSpider.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../novelSpider/static/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/../novelSpider/static/css/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../novelSpider/static/fonts/glyphicons-halflings-regular.svg" afterPath="$PROJECT_DIR$/../novelSpider/static/fonts/glyphicons-halflings-regular.svg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../novelSpider/static/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/../novelSpider/static/js/bootstrap.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../novelSpider/static/js/jquery.js" afterPath="$PROJECT_DIR$/../novelSpider/static/js/jquery.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../novelSpider/templates/hello.html" afterPath="$PROJECT_DIR$/../novelSpider/templates/hello.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/webSpider.iml" afterPath="$PROJECT_DIR$/.idea/webSpider.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="064b99a2-d855-4b08-a862-3b8df5f18ace" name="Default" comment="" />
     <ignored path="webSpider.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -818,14 +676,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15323855" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15323855" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32976446" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3264865" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32864866" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32864866" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32756758" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
