@@ -7,8 +7,8 @@ var ListBox = React.createClass({
 			listChange: function(book) {
 				var books = this.state.data;
 				book = JSON.parse(JSON.stringify(book));
-				book._id = book._id + "0000" + book._id;
-				var newBooks = books.concat([book]);
+				book._id = book._id + "_" + Math.random();
+				var newBooks = [book].concat(books);
 				this.setState({
 					data: newBooks
 				});
