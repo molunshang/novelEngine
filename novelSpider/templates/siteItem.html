@@ -1,0 +1,118 @@
+{% extends "baseLayout.html" %}
+{% block title %}站点配置信息{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    站点信息
+                </header>
+                <div class="panel-body">
+                    <form class="form-horizontal tasi-form" method="post">
+                        {{ form.hidden_tag() }}
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">站点名称</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="SiteName">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">站点地址</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="SiteHost">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">站点编码</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="SiteEncoding">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">列表链接匹配正则</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="ListRegex">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">列表更新时间匹配正则</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="ListTimeRegex">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">小说详情页正则</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="DetailRegex">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">小说章节页正则</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="DetailListRegex">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">小说章节列表正则</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="DetailItemRegex">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">章节是否排序</label>
+                            <div class="col-sm-10">
+                                <div class="switch switch-square"
+                                     data-on-label="<i class=' icon-ok'></i>"
+                                     data-off-label="<i class='icon-remove'></i>">
+                                    <input name="ItemSort" type="checkbox" checked=""/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">章节内容匹配</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="DetailMatch">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">章节匹配类型</label>
+                            <div class="col-sm-10">
+                                <select name="MatchType" class="form-control m-bot15">
+                                    <option value="1">js选择器</option>
+                                    <option value="2">正则表达式</option>
+                                    <option value="3">XPath</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">小说标题正则</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="TitleRegex">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">小说作者正则</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="AuthorRegex">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">小说图标正则</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="IconRegex">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">小说最后更新日期</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="LastTime">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-info">确定</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+{% endblock %}
