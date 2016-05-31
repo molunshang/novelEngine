@@ -4,7 +4,7 @@ import link;
 import os
 import re
 import time
-
+import copy
 from AsyncBaseSpider.redisQueue import redisQueue
 from AsyncBaseSpider.spider import spider
 from setting import *;
@@ -12,18 +12,16 @@ from setting import *;
 
 class novelSpider(spider):
     def __init__(self, link, loop=None):
+        self.redisClient = redisClient;
+        self.expireKeys = set();
+        self.sequenceName = "SeqSpider_" + link.host;
+        self.sequence = str(self.getTaskSequence());
+        self.bookDict = globalBookDict;
         queue = redisQueue("linkQueue_" + link.host);
-        queue.enqueue({"link": link.link, "host": link.host, "linktype": link.type});
+        queue.enqueue({"link": link.link, "host": link.host, "linktype": link.type, "partitionFlag": self.sequence});
         if loop is None:
             loop = asyncio.get_event_loop();
         spider.__init__(self, queue, os.cpu_count(), loop);
-        self.expireKeys = set();
-        self.sequenceName = "SeqSpider_" + link.host;
-        self.redisClient = redisClient;
-        self.historyName = "record_" + link.host + "_" + str(
-            self.getTaskSequence());  # time.strftime('%y-%m-%d', time.localtime(time.time()));
-        self.bookDict = globalBookDict;
-        self.expireKeys.add(self.historyName);
 
     def getTaskSequence(self):
         taskSeqName = self.sequenceName;
@@ -50,20 +48,16 @@ class novelSpider(spider):
     def closeTransaction(self):
         self.redisClient.delete(self.sequenceName);
         for k in self.expireKeys:
-            self.redisClient.expire(k, 3600);
+            self.redisClient.expire(k, 3600 * 24 * 3);
 
     def filter(self, item):
-        recordName = self.historyName;
-        if "time" in item:
-            recordName = "record_" + item["host"] + "_" + item["time"];
-            self.expireKeys.add(recordName);
+        recordName = "record_" + item["host"] + "_" + item["partitionFlag"];
+        self.expireKeys.add(recordName);
         return redisClient.sismember(recordName, item["link"]);
 
     def record(self, item):
-        recordName = self.historyName;
-        if "time" in item:
-            recordName = "record_" + item["host"] + "_" + item["time"];
-            self.expireKeys.add(recordName);
+        recordName = "record_" + item["host"] + "_" + item["partitionFlag"];
+        self.expireKeys.add(recordName);
         redisClient.sadd(recordName, item["link"]);
 
     @asyncio.coroutine
@@ -76,24 +70,25 @@ class novelSpider(spider):
             return;
         linkType = item["linktype"];
         if linkType == 1:
-            yield from self.parseLink(html, config, host, link);
+            yield from self.parseLink(html, config, item);
         elif linkType == 2:
-            yield from self.parseContent(html, config, host, link);
+            yield from self.parseContent(html, config, item);
         elif linkType == 3:
-            yield from self.parseArticle(html, config, host, link);
+            yield from self.parseArticle(html, config, item);
         print("抓取链接%s,类型%s" % (link, str(linkType)));
 
     @asyncio.coroutine
-    def parseLink(self, html, config, host, link):
+    def parseLink(self, html, config, linkItem):
         '''
         格式化列表
         '''
+        dataItem = copy.deepcopy(linkItem);
+        host = linkItem["host"];
         regItem = config["list"];
         reg = regItem["regex"];
         time = config["time"];
         linkType = regItem["type"];
         links = re.findall(reg, html);
-        times = re.findall(time, html);
         lastTime = redisClient.get("lastTime_" + host);
         if not lastTime:
             lastTime = config["lastTime"];
@@ -103,32 +98,33 @@ class novelSpider(spider):
             for l in set(links):
                 nl = self.convertLink(host, l, link, linkType);
                 if nl:
-                    nl = {"link": nl, "host": host, "linktype": linkType};
-                    if not self.filter(nl):
-                        self.queue.enqueue(nl);
+                    dataItem["link"] = nl;
+                    dataItem["linktype"] = linkType;
+                    if not self.filter(dataItem):
+                        self.queue.enqueue(dataItem);
         regItem = config["detail"];
         linkType = regItem["type"];
-        details = re.findall(regItem["regex"], html);
+        times = re.findall(time, html);
+        details = set(re.findall(regItem["regex"], html));
+        if (not details or len(details) <= 0) or (not times or len(times) <= 0):
+            return;
         if details:
+            timeLastIndex = len(times) - 1;
             index = 0;
-            t = '00-00-00';
-            for l in set(details):
-                if times:
-                    tlen = len(times);
-                    if index >= tlen:
-                        index = tlen - 1;
-                    t = times[index];
-                    index = index + 1;
-                    if t < lastTime:
-                        continue;
+            for l in details:
+                dataItem["partitionFlag"] = times[min(index, timeLastIndex)];
+                if dataItem["partitionFlag"] < lastTime:
+                    continue;
+                index = index + 1;
                 nl = self.convertLink(host, l, link, linkType);
                 if nl:
-                    item = {"link": nl, "host": host, "linktype": linkType, "time": t};
-                    if not self.filter(item):
-                        self.queue.enqueue(item);
+                    dataItem["link"] = nl;
+                    dataItem["linktype"] = linkType;
+                    if not self.filter(dataItem):
+                        self.queue.enqueue(dataItem);
 
     @asyncio.coroutine
-    def parseContent(self, html, config, host, link):
+    def parseContent(self, html, config, linkItem):
         '''
         格式化小说主页
         :param html:
@@ -137,18 +133,19 @@ class novelSpider(spider):
         :param link:
         :return:
         '''
+        dataItem = copy.deepcopy(linkItem);
         yield from self.ensureBook(html, config);
         regItem = config["detailList"];
         res = re.findall(regItem["regex"], html);
         if res:
             for l in set(res):
-                self.convertLink(host, l, link, regItem["type"]);
-                item = {"link": l, "host": host, "linktype": regItem["type"]};
-                if not self.filter(item):
-                    self.queue.enqueue(item);
+                dataItem["link"] = self.convertLink(dataItem["host"], l, dataItem["link"], regItem["type"]);
+                dataItem["linktype"] = regItem["type"];
+                if not self.filter(dataItem):
+                    self.queue.enqueue(dataItem);
 
     @asyncio.coroutine
-    def parseArticle(self, html, config, host, link):
+    def parseArticle(self, html, config, linkItem):
         info = yield from self.ensureBook(html, config);
         if not info:
             return
@@ -161,7 +158,8 @@ class novelSpider(spider):
         for li in items:
             yield from client["book"].BookLinks.update({"BookId": bookId, "LinkName": li["name"]},
                                                        {"$addToSet": {
-                                                           "Links": self.convertLink(host, li["link"], link, 3)},
+                                                           "Links": self.convertLink(linkItem["host"], li["link"],
+                                                                                     linkItem["link"], 3)},
                                                            "$setOnInsert": {"Time": time.time(), "Num": order}},
                                                        True);
             order = order + 1;

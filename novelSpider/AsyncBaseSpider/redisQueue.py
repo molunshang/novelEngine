@@ -14,7 +14,7 @@ class redisQueue(spiderQueue):
     def dequeue(self):
         data = self.client.rpop(self.__queueName__);
         if data is not None:
-            data = eval(data);
+            data = eval(data[1]);
         return data;
 
     def blockDequeue(self):
