@@ -6,13 +6,17 @@ var ListBox = React.createClass({
 			},
 			listChange: function(book) {
 				var books = this.state.data;
-				book = JSON.parse(JSON.stringify(book));
-				book._id = book._id + "_" + Math.random();
+				var i = 0;
+				for (; i < books.length; i++) {
+					if (book == books[i]) {
+						break;
+					}
+				}
+				books.splice(i, 1);
 				var newBooks = [book].concat(books);
 				this.setState({
 					data: newBooks
 				});
-				console.log(this.state.data);
 			},
 			render: function() {
 				return ( < List data = {
@@ -25,47 +29,49 @@ var ListBox = React.createClass({
 				}
 			});
 		var List = React.createClass({
-				listChange: function(book) {
-					this.props.contentChange(book)
-				},
-				render: function() {
-					var list = this;
-					return ( < ul id = "books"
-						className = "mui-table-view mui-grid-view mui-grid-9" > {
-							this.props.data.map(function(item) {
-									return ( < Item key = {
-											item._id
-										}
-										book = {
-											item
-										}
-										onSaveLocal = {
-											this.listChange
-										}
-										/>);
-									}.bind(this))
-							} < /ul>
-						);
-					}
-				});
-			var Item = React.createClass({
+					listChange: function(book) {
+						this.props.contentChange(book)
+					},
+					render: function() {
+						var list = this;
+						return ( < ul id = "books"
+							className = "mui-table-view mui-grid-view mui-grid-9" > {
+								this.props.data.map(function(item) {
+										return ( < Item key = {
+												item._id
+											}
+											book = {
+												item
+											}
+											onSaveLocal = {
+												this.listChange
+											}
+											/>);
+										}.bind(this))
+								} < /ul>
+							);
+						}
+					});
+				var Item = React.createClass({
 					imgLoadError: function() {
 						ReactDOM.findDOMNode(this).getElementsByTagName("img")[0].src = "images/nocover.jpg";
 					},
 					saveToLocal: function() {
 						var self = this;
-						var book = new BookModel(self.props.book);
-						book.IsLocal = true;
-						api.addToLocal(book);
+						var book = self.props.book;
+						api.setNewRead(book._id);
 						self.props.onSaveLocal(self.props.book);
 					},
 					render: function() {
 						var item = this.props.book;
-						return ( < li onClick = {
+						return ( < li onTouchEnd = {
 								this.saveToLocal
 							}
 							className = "mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" > < img onError = {
 								this.imgLoadError
+							}
+							onTouchEnd = {
+								this.saveToLocal
 							}
 							src = {
 								(item.Icon || 'images/nocover.jpg')
@@ -76,45 +82,45 @@ var ListBox = React.createClass({
 									maxWidth: '100px'
 								}
 							}
-							/ > < div className = "mui-media-body" > {
-							item.BookName
-						} < /div></li > );
-				}
-			});
+							/ > < div className = "mui-media-body" 
+							onTouchEnd = {
+								this.saveToLocal
+							} > {
+								item.BookName
+							} < /div></li > );
+					}
+				});
 
-		mui.init({
-			pullRefresh: {
-				container: '#pullrefresh',
-				down: {
-					callback: pulldownRefresh
-				}
-			}
-		});
+				mui.init({
+					pullRefresh: {
+						container: '#pullrefresh',
+						down: {
+							callback: pulldownRefresh
+						}
+					}
+				});
 
-		/**
-		 * 下拉刷新具体业务实现
-		 */
-		function pulldownRefresh() {
-			setTimeout(function() {
-					api.getLocalBooks();
-					api.list(1).done(function(res) {
-							if (res.isok) {
-								ReactDOM.render( < ListBox data = {
-										res.data
-									}
-									/>, document.getElementById('content'));
-								}
-							}); mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-					}, 1500);
-			}
-			if (mui.os.plus) {
-				mui.plusReady(function() {
+				/**
+				 * 下拉刷新具体业务实现
+				 */
+				function pulldownRefresh() {
 					setTimeout(function() {
-						mui('#pullrefresh').pullRefresh().pulldownLoading();
-					}, 1000);
-				});
-			} else {
-				mui.ready(function() {
-					mui('#pullrefresh').pullRefresh().pulldownLoading();
-				});
-			}
+							api.getLocalBooks().done(function(data) {
+									ReactDOM.render( < ListBox data = {
+											data
+										}
+										/>, document.getElementById('content'));
+									}); mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+							}, 1500);
+					};
+					if (mui.os.plus) {
+						mui.plusReady(function() {
+							setTimeout(function() {
+								mui('#pullrefresh').pullRefresh().pulldownLoading();
+							}, 1000);
+						});
+					} else {
+						mui.ready(function() {
+							mui('#pullrefresh').pullRefresh().pulldownLoading();
+						});
+					}

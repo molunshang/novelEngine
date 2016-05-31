@@ -44,18 +44,26 @@ var api = {
 		var link = config.host + "/search/" + name;
 		mui.getJSON(link, null, function() {
 			worker.setResult(data);
-		});		
+		});
 		return worker;
 	},
 	getLocalBooks: function() {
 		var worker = new workItem();
-		console.log("books_local");
-		html5sql.process("select * from books", function(transaction, results) {
+		html5sql.process("select * from books order by LastReadTime desc", function(transaction, results) {
+			var books = [];
 			for (var i = 0; i < results.rows.length; i++) {
 				var row = results.rows[i];
-				var books = [];
-				console.log(row);
+				var book = {
+					"_id": row.bookId,
+					"BookName": row.name,
+					"Author": row.author,
+					isLocal: true,
+					"Icon": row.icon,
+					"LastReadTime": row.lastReadTime
+				};
+				books.push(book);
 			}
+			worker.setResult(books);
 		});
 		return worker;
 	},
@@ -69,6 +77,22 @@ var api = {
 				worker.setResult(true);
 			},
 		}], function() {}, function() {});
+		return worker;
+	},
+	setNewRead: function(bookId) {
+		var worker = new workItem();
+		var sql = "UPDATE books set lastReadTime=? WHERE bookId=?";
+		html5sql.process([{
+			"sql": sql,
+			"data": [new Date(), bookId],
+			"success": function(transaction, results) {
+				worker.setResult(true);
+			},
+		}], function() {
+			console.log(arguments);
+		}, function() {
+			console.log(arguments);
+		});
 		return worker;
 	}
 };
