@@ -1,0 +1,145 @@
+{% block doc -%}
+    <!DOCTYPE html>
+    <html{% block html_attribs %}{% endblock html_attribs %}>
+    {%- block html %}
+        <head>
+            {%- block head %}
+                <title>{% block title %}{{ title|default }}{% endblock title %}</title>
+                {%- block metas %}
+                    <meta charset="utf-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                {%- endblock metas %}
+                <!-- Bootstrap core CSS -->
+                <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+                <link href="{{ url_for('static', filename='css/bootstrap-reset.css') }}" rel="stylesheet">
+                <!--external css-->
+                <link href="{{ url_for('static', filename='assets/font-awesome/css/font-awesome.css') }}"
+                      rel="stylesheet">
+                <link href="{{ url_for('static', filename='assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css') }}"
+                      rel="stylesheet" type="text/css" media="screen"/>
+                <link href="{{ url_for('static', filename='css/owl.carousel.css') }}" rel="stylesheet" type="text/css">
+                <!-- Custom styles for this template -->
+                <link href="{{ url_for('static', filename='css/owl.carousel.css') }}" rel="stylesheet" type="text/css">
+                <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css">
+                <link href="{{ url_for('static', filename='css/style-responsive.css') }}" rel="stylesheet"
+                      type="text/css">
+                <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+                <!--[if lt IE 9]>
+    <script src="{{url_for('static', filename='js/html5shiv.js')}}"></script>
+    <script src="{{url_for('static', filename='js/respond.min.js')}}"></script>
+    <![endif]-->
+                {%- block styles %}
+                {%- endblock styles %}
+            {%- endblock head %}
+        </head>
+        <body{% block body_attribs %}{% endblock body_attribs %}>
+        {% block body -%}
+            {% block navbar %}
+            {%- endblock navbar %}
+            <section id="container" class="">
+                <!--header start-->
+                <header class="header white-bg">
+                    <div class="sidebar-toggle-box">
+                        <div data-original-title="Toggle Navigation" data-placement="right"
+                             class="icon-reorder tooltips"></div>
+                    </div>
+                    <!--logo start-->
+                    <a href="#" class="logo">Flat<span>lab</span></a>
+                    <!--logo end-->
+                    <div class="top-nav ">
+                        <!--search & user info start-->
+                        <ul class="nav pull-right top-menu">
+                            <li>
+                                <input type="text" class="form-control search" placeholder="Search">
+                            </li>
+                            <!-- user login dropdown start-->
+                            <li class="dropdown">
+                                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                    <img alt="" src="img/avatar1_small.jpg">
+                                    <span class="username">Jhon Doue</span>
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu extended logout">
+                                    <div class="log-arrow-up"></div>
+                                    <li><a href="#"><i class=" icon-suitcase"></i>Profile</a></li>
+                                    <li><a href="#"><i class="icon-cog"></i> Settings</a></li>
+                                    <li><a href="#"><i class="icon-bell-alt"></i> Notification</a></li>
+                                    <li><a href="login.html"><i class="icon-key"></i> Log Out</a></li>
+                                </ul>
+                            </li>
+                            <!-- user login dropdown end -->
+                        </ul>
+                        <!--search & user info end-->
+                    </div>
+                </header>
+                <!--header end-->
+                <!--sidebar start-->
+                <aside>
+                    <div id="sidebar" class="nav-collapse ">
+                        <!-- sidebar menu start-->
+                        <ul class="sidebar-menu">
+                            <li class="active">
+                                <a class="" href="index.html">
+                                    <i class="icon-dashboard"></i>
+                                    <span>功能列表</span>
+                                </a>
+                            </li>
+                            <li class="sub-menu">
+                                <a href="javascript:;" class="">
+                                    <i class="icon-th"></i>
+                                    <span>抓取站点列表</span>
+                                    <span class="arrow"></span>
+                                </a>
+                                <ul class="sub">
+                                    <li><a class="" href="/siteconfig/list">站点列表</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <!-- sidebar menu end-->
+                    </div>
+                </aside>
+                <!--sidebar end-->
+                <!--main content start-->
+                <section id="main-content">
+                    <section class="wrapper">
+                        {% block content -%}
+                        {%- endblock content %}
+                    </section>
+                </section>
+                <!--main content end-->
+            </section>
+            {% block scripts %}
+            {%- endblock scripts %}
+            <!-- js placed at the end of the document so the pages load faster -->
+            <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/jquery.scrollTo.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/jquery.nicescroll.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/jquery.sparkline.js') }}"></script>
+            <script src="{{ url_for('static', filename='assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/owl.carousel.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/jquery.customSelect.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/common-scripts.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/sparkline-chart.js') }}"></script>
+            <script src="{{ url_for('static', filename='js/easy-pie-chart.js') }}"></script>
+            <script>
+                //owl carousel
+                $(document).ready(function () {
+                    $("#owl-demo").owlCarousel({
+                        navigation: true,
+                        slideSpeed: 300,
+                        paginationSpeed: 400,
+                        singleItem: true
+
+                    });
+                });
+                //custom select box
+                $(function () {
+                    $('select.styled').customSelect();
+                });
+            </script>
+        {%- endblock body %}
+        </body>
+    {%- endblock html %}
+    </html>
+{% endblock doc -%}

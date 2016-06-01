@@ -17,6 +17,12 @@ class redisQueue(spiderQueue):
             data = eval(data);
         return data;
 
+    def blockDequeue(self):
+        data = self.client.brpop(self.__queueName__);
+        if data is not None:
+            data = eval(data[1]);
+        return data;
+
     def count(self):
         return self.client.llen(self.__queueName__);
 

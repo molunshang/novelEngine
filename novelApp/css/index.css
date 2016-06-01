@@ -1,0 +1,10 @@
+body {background-color:#5C2201; font-size: 14px; }
+.mainmenu{ margin:0px auto; background:url(../images/5_line.jpg) repeat-y;  background-size: 100% auto ;overflow:hidden; display: block;}
+.mainmenu .sc,body .mainmenu .gc,body .mainmenu  .bottom{ width:100%;}
+.mainmenu ul{ margin:0 auto; padding:0%  4%; overflow:hidden ;    }
+.mainmenu li{ float:left; margin-left:1%;  width:32%;   }
+.mainmenu li a{ display:block;  color:#FFF;   text-align:center }
+.mainmenu li a:active{ background-color:rgba(0,0,0,0.2); border-radius:5px;}
+.mainmenu li a img{  width:90%;height: 150px;}
+.mainmenu li a p{ display:block; line-height:22px;color:#5C2201; font-size:14px; }
+.mainmenu div:last-of-type .gc{ display:none}

@@ -3,7 +3,6 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="jdk" jdkName="spiderEnv" jdkType="Python SDK" />
-    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="webSpider" />
     <orderEntry type="module" module-name="test" />

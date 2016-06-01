@@ -5,62 +5,27 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title></title>
+		<link rel="stylesheet" href="css/mui.min.css" />
+		<link rel="stylesheet" href="css/publicStyle.css" />
+		<link rel="stylesheet" href="css/index.css" />
 		<script src="js/mui.min.js"></script>
-		<link href="css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" src="js/html5sql.js"></script>
+		<script type="text/javascript" src="js/react.js"></script>
+		<script type="text/javascript" src="js/react-dom.min.js"></script>
 		<script type="text/javascript" src="js/config.js"></script>
+		<script type="text/javascript" src="js/models.js" ></script>
 		<script type="text/javascript" src="js/app.js"></script>
+		<script src="js/browser.min.js"></script>
+		<script type="text/babel" src="js/appView.js"></script>
 	</head>
 
 	<body>
 		<!--下拉刷新容器-->
 		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
-			<div class="mui-scroll">
+			<div id="content" class="mainmenu mui-scroll">
 				<!--数据列表-->
-				<ul id="books" class="mui-table-view mui-grid-view mui-grid-9"></ul>
 			</div>
 		</div>
-		<script>
-			mui.init({
-				pullRefresh: {
-					container: '#pullrefresh',
-					down: {
-						callback: pulldownRefresh
-					}
-				}
-			});
-			/**
-			 * 下拉刷新具体业务实现
-			 */
-			function pulldownRefresh() {
-				setTimeout(function() {
-					api.list(1).done(function(res) {
-						if (res.isok) {
-							var html = [];
-							for (var i = 0; i < res.data.length; i++) {
-								var item = res.data[i];
-								html.push('<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><img onerror="imgLoadError(this)" src="' + (item.Icon || "images/nocover.jpg") + '" style="max-width:120px;max-height:150px;min-width:120px;min-height:150px;"/><div class="mui-media-body">' + item.BookName + '</div></li>');
-							}
-							content = html.join("");
-							document.getElementById("books").innerHTML = content;
-							mui("#books").on("tab", "li", function(m) {
-								alert("test");
-							});
-						}
-					});
-					mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-				}, 1500);
-			}
-			if (mui.os.plus) {
-				mui.plusReady(function() {
-					setTimeout(function() {
-						mui('#pullrefresh').pullRefresh().pulldownLoading();
-					}, 1000);
-				});
-			} else {
-				mui.ready(function() {
-					mui('#pullrefresh').pullRefresh().pulldownLoading();
-				});
-			}
-		</script>
 	</body>
+
 </html>

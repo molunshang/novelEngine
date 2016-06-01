@@ -215,7 +215,16 @@
 					"js/config.js",
 					"images/nocover.jpg",
 					"js/mui.min.js",
-					"css/mui.min.css"
+					"css/mui.min.css",
+					"js/appView.js",
+					"js/react.min.js",
+					"js/react-dom.min.js",
+					"js/react-dom.js",
+					"js/react.js",
+					"js/browser.min.js",
+					"1.json",
+					"css/index.css",
+					"css/publicStyle.css"
 				],
 				"refer": [],
 				"priority": 0
