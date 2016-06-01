@@ -11,7 +11,7 @@ def search(name):
     return jsonify(isok=True, data=toArray(result));
 
 
-@api.route('/newitems/<float:searchtime>')
+@api.route('/newbooklist/<float:searchtime>')
 def getNewItem(searchtime):
     searchtime = float(searchtime);
     if "books" not in request.form:
