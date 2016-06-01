@@ -4,6 +4,7 @@ html, body {
 	margin:0;
 	padding: 0;
 	text-decoration: none;
+	background-color:#FFFFFF;
 }
 body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td {
 	margin:0;
@@ -27,3 +28,23 @@ a {
 	height:0;
 	overflow:hidden;
 }
+/*图片的样式*/
+.var_m{vertical-align: middle;}
+.var_b{vertical-align: bottom;}
+.var_t{vertical-align:top;}
+/*背景颜色*/
+.bgFFFFFF{background: #FFFFFF;}/*白色*/
+.bgECECEC{background: #ECECEC;}/*浅灰色*/
+/*字体颜色*/
+.corFFFFFF{color: #FFFFFF;}/*白色*/
+/*字体大小*/
+.f_14{font-size: 14px;}
+.f_16{font-size: 16px;}
+.f_18{font-size: 18px;}
+.f_20{font-size: 20px;}
+/*外边距*/
+.mar_t20{margin-top: 20px;}
+.mar_b140{margin-bottom: 140px;}
+/*内边距*/
+.pad_l10{padding-left: 10px;}
+.pad_b150{padding-bottom:150px;}
