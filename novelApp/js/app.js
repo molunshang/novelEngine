@@ -88,11 +88,7 @@ var api = {
 			"success": function(transaction, results) {
 				worker.setResult(true);
 			},
-		}], function() {
-			console.log(arguments);
-		}, function() {
-			console.log(arguments);
-		});
+		}], function() {}, function() {});
 		return worker;
 	}
 };

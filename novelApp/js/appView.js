@@ -29,32 +29,44 @@ var ListBox = React.createClass({
 				}
 			});
 		var List = React.createClass({
-					listChange: function(book) {
-						this.props.contentChange(book)
-					},
-					render: function() {
-						var list = this;
-						return ( < ul id = "books"
-							className = "mui-table-view mui-grid-view mui-grid-9" > {
-								this.props.data.map(function(item) {
-										return ( < Item key = {
-												item._id
-											}
-											book = {
-												item
-											}
-											onSaveLocal = {
-												this.listChange
-											}
-											/>);
-										}.bind(this))
-								} < /ul>
-							);
-						}
-					});
-				var Item = React.createClass({
+				listChange: function(book) {
+					this.props.contentChange(book)
+				},
+				render: function() {
+					var list = this;
+					return ( < ul id = "books"
+						className = "mui-table-view mui-grid-view mui-grid-9" > {
+							this.props.data.map(function(item) {
+									return ( < Item key = {
+											item._id
+										}
+										book = {
+											item
+										}
+										onSaveLocal = {
+											this.listChange
+										}
+										/>);
+									}.bind(this))
+							} < li className = "mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" > < img src = "images/addbook.png" / > < div className = "mui-media-body" > 添加小说 < /div > < /li > < /ul >
+						);
+					}
+				});
+			var Item = React.createClass({
 					imgLoadError: function() {
 						ReactDOM.findDOMNode(this).getElementsByTagName("img")[0].src = "images/nocover.jpg";
+					},
+					touchStart: function() {
+						this.selfData.move = false;
+					},
+					touchMove: function() {
+						this.selfData.move = true;
+					},
+					touchEnd: function() {
+						if (this.selfData.move) {
+							return;
+						}
+						this.saveToLocal();
 					},
 					saveToLocal: function() {
 						var self = this;
@@ -62,16 +74,20 @@ var ListBox = React.createClass({
 						api.setNewRead(book._id);
 						self.props.onSaveLocal(self.props.book);
 					},
+					selfData: {},
 					render: function() {
 						var item = this.props.book;
-						return ( < li onTouchEnd = {
-								this.saveToLocal
+						return ( < li onTouchStart = {
+								this.touchStart
+							}
+							onTouchMove = {
+								this.touchMove
+							}
+							onTouchEnd = {
+								this.touchEnd
 							}
 							className = "mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" > < img onError = {
 								this.imgLoadError
-							}
-							onTouchEnd = {
-								this.saveToLocal
 							}
 							src = {
 								(item.Icon || 'images/nocover.jpg')
@@ -82,45 +98,43 @@ var ListBox = React.createClass({
 									maxWidth: '100px'
 								}
 							}
-							/ > < div className = "mui-media-body" 
-							onTouchEnd = {
-								this.saveToLocal
-							} > {
-								item.BookName
-							} < /div></li > );
-					}
-				});
+							/ > < div className = "mui-media-body"> {
+							item.BookName
+						} < /div></li > );
+				}
+			});
 
-				mui.init({
-					pullRefresh: {
-						container: '#pullrefresh',
-						down: {
-							callback: pulldownRefresh
-						}
-					}
-				});
+		mui.init({
+			pullRefresh: {
+				container: '#pullrefresh',
+				down: {
+					callback: pulldownRefresh
+				}
+			}
+		});
 
-				/**
-				 * 下拉刷新具体业务实现
-				 */
-				function pulldownRefresh() {
+		/**
+		 * 下拉刷新具体业务实现
+		 */
+		function pulldownRefresh() {
+			setTimeout(function() {
+					api.getLocalBooks().done(function(data) {
+							ReactDOM.render( < ListBox data = {
+									data
+								}
+								/>, document.getElementById('content'));
+							}); mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+					}, 1500);
+			};
+			if (mui.os.plus) {
+				mui.plusReady(function() {
 					setTimeout(function() {
-							api.getLocalBooks().done(function(data) {
-									ReactDOM.render( < ListBox data = {
-											data
-										}
-										/>, document.getElementById('content'));
-									}); mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
-							}, 1500);
-					};
-					if (mui.os.plus) {
-						mui.plusReady(function() {
-							setTimeout(function() {
-								mui('#pullrefresh').pullRefresh().pulldownLoading();
-							}, 1000);
-						});
-					} else {
-						mui.ready(function() {
-							mui('#pullrefresh').pullRefresh().pulldownLoading();
-						});
-					}
+						mui('#pullrefresh').pullRefresh().pulldownLoading();
+					}, 1000);
+				});
+			} else {
+				mui.ready(function() {
+					mui('#pullrefresh').pullRefresh().pulldownLoading();
+				});
+			}
+			React.initializeTouchEvents(true);
