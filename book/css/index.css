@@ -411,13 +411,6 @@ body .mainmenu .bottom {
 	color: #FFFFFF;
 	font-size: 18px;
 }
-
-.menu .mui-table-view-inverted .mui-table-view-cell:after {
-	height: 2px;
-	left: 0;
-	right: 0;
-}
-
 .menu-wrapper.mui-active,
 .menu-wrapper.mui-active .menu {
 	-webkit-transform: translate3d(0, 0, 0);
@@ -425,3 +418,8 @@ body .mainmenu .bottom {
 }
 .icon_add{position: fixed;right: 15px;bottom: 30%;}
 .icon_add #icon-plus span{font-size: 50px;color: #EC971F;}
+
+
+
+/*图书阅读*/
+.book-reading{background: transparent;} 
