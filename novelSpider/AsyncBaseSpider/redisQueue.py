@@ -1,11 +1,10 @@
 import redis;
 from AsyncBaseSpider.spiderQueue import spiderQueue
-import setting;
 
 
 class redisQueue(spiderQueue):
-    def __init__(self, name):
-        self.client = redis.Redis(connection_pool=setting.redisPool);
+    def __init__(self, name, address="127.0.0.1", port=6379):
+        self.client = redis.Redis(connection_pool=redis.ConnectionPool(host=address, port=port, db=0));
         self.__queueName__ = name;
 
     def enqueue(self, item):
