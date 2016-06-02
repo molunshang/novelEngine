@@ -46,5 +46,7 @@ a {
 .mar_t20{margin-top: 20px;}
 .mar_b140{margin-bottom: 140px;}
 /*内边距*/
+.pad_t0{padding-top: 0px;}
 .pad_l10{padding-left: 10px;}
+.pad_b0{padding-bottom: 0px;}
 .pad_b150{padding-bottom:150px;}
