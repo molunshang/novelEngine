@@ -7,6 +7,7 @@
 			async: true,
 			data: data,
 			success: function(res) {
+				console.log(JSON.stringify(res));
 				task.resolve(res);
 			},
 			error: function() {
@@ -16,7 +17,10 @@
 		return task;
 	}
 	api = window.api || {};
-	api.root = "";
+	api.errorImg = function imgLoadError(img) {
+		img.target.src = "images/nocover.jpg";
+	};
+	api.root = "http://192.168.31.126:5000";
 	api.getConfig = function() {
 		return apiCall("/api/config");
 	};
@@ -32,4 +36,7 @@
 		}
 		return apiCall("/api/newbooklist/" + serverTime, "GET", data);
 	};
+	api.getLocalBooks = function() {
+		return apiCall("/api/list/1");
+	}
 })();

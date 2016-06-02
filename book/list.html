@@ -89,51 +89,51 @@
 							</a>
 						</li>
 					</ul>
-					</div>
 				</div>
+			</div>
 			<div id="menu-backdrop" class="menu-backdrop"></div>
 			<div class="icon_add">
 				<a id="icon-plus"><span class="mui-icon mui-icon-plus"></span></a>
 			</div>
-			</div>
-			<script type="text/javascript" src="js/mui.min.js"></script>
-			<script>
-				mui.init({
-					swipeBack: true //启用右滑关闭功能
-				});
-				var menuWrapper = document.getElementById("menu-wrapper");
-				var menu = document.getElementById("menu");
-				var menuWrapperClassList = menuWrapper.classList;
-				var backdrop = document.getElementById("menu-backdrop");
-				backdrop.addEventListener('tap', toggleMenu);
-				document.getElementById("menu-btn").addEventListener('tap', toggleMenu);
-				document.getElementById("icon-menu").addEventListener('tap', toggleMenu)
-				var busying = false;
+		</div>
+		<script type="text/javascript" src="js/mui.min.js"></script>
+		<script>
+			mui.init({
+				swipeBack: true //启用右滑关闭功能
+			});
+			var menuWrapper = document.getElementById("menu-wrapper");
+			var menu = document.getElementById("menu");
+			var menuWrapperClassList = menuWrapper.classList;
+			var backdrop = document.getElementById("menu-backdrop");
+			backdrop.addEventListener('tap', toggleMenu);
+			document.getElementById("menu-btn").addEventListener('tap', toggleMenu);
+			document.getElementById("icon-menu").addEventListener('tap', toggleMenu)
+			var busying = false;
 
-				function toggleMenu() {
-					if (busying) {
-						return;
-					}
-					busying = true;
-					if (menuWrapperClassList.contains('mui-active')) {
-						document.body.classList.remove('menu-open');
-						menuWrapper.className = 'menu-wrapper fade-out-up animated';
-						menu.className = 'menu bounce-out-up animated';
-						setTimeout(function() {
-							backdrop.style.opacity = 0;
-							menuWrapper.classList.add('hidden');
-						}, 500);
-					} else {
-						document.body.classList.add('menu-open');
-						menuWrapper.className = 'menu-wrapper fade-in-down animated mui-active';
-						menu.className = 'menu bounce-in-down animated';
-						backdrop.style.opacity = 1;
-					}
-					setTimeout(function() {
-						busying = false;
-					}, 500);
+			function toggleMenu() {
+				if (busying) {
+					return;
 				}
-			</script>
+				busying = true;
+				if (menuWrapperClassList.contains('mui-active')) {
+					document.body.classList.remove('menu-open');
+					menuWrapper.className = 'menu-wrapper fade-out-up animated';
+					menu.className = 'menu bounce-out-up animated';
+					setTimeout(function() {
+						backdrop.style.opacity = 0;
+						menuWrapper.classList.add('hidden');
+					}, 500);
+				} else {
+					document.body.classList.add('menu-open');
+					menuWrapper.className = 'menu-wrapper fade-in-down animated mui-active';
+					menu.className = 'menu bounce-in-down animated';
+					backdrop.style.opacity = 1;
+				}
+				setTimeout(function() {
+					busying = false;
+				}, 500);
+			}
+		</script>
 	</body>
 
 </html>

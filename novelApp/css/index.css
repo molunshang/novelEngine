@@ -1,10 +1,425 @@
-body {background-color:#5C2201; font-size: 14px; }
-.mainmenu{ margin:0px auto; background:url(../images/5_line.jpg) repeat-y;  background-size: 100% auto ;overflow:hidden; display: block;}
-.mainmenu .sc,body .mainmenu .gc,body .mainmenu  .bottom{ width:100%;}
-.mainmenu ul{ margin:0 auto; padding:0%  4%; overflow:hidden ;    }
-.mainmenu li{ float:left; margin-left:1%;  width:32%;   }
-.mainmenu li a{ display:block;  color:#FFF;   text-align:center }
-.mainmenu li a:active{ background-color:rgba(0,0,0,0.2); border-radius:5px;}
-.mainmenu li a img{  width:90%;height: 150px;}
-.mainmenu li a p{ display:block; line-height:22px;color:#5C2201; font-size:14px; }
-.mainmenu div:last-of-type .gc{ display:none}
+body {
+	font-size: 14px;
+}
+
+.mainmenu {
+	margin: 0px auto;
+	background: url(../images/5_line.jpg) repeat-y;
+	background-size: 100% auto;
+	display: block;
+	overflow: hidden;
+}
+
+.mainmenu .sc,
+body .mainmenu .gc,
+body .mainmenu .bottom {
+	width: 100%;
+}
+
+.mainmenu ul {
+	margin: 0 auto;
+	padding: 0% 4%;
+	overflow: hidden;
+}
+
+.mainmenu li {
+	float: left;
+	margin-left: 1%;
+	width: 32%;
+}
+
+.mainmenu li a {
+	display: block;
+	color: #FFF;
+	text-align: center
+}
+
+.mainmenu li a:active {
+	background-color: rgba(0, 0, 0, 0.2);
+	border-radius: 5px;
+}
+
+.mainmenu li a img {
+	width: 90%;
+	height: 150px;
+}
+
+.mainmenu li a p {
+	display: block;
+	line-height: 22px;
+	color: #5C2201;
+	font-size: 14px;
+}
+
+.mainmenu div:last-of-type .gc {
+	display: none
+}
+
+.addIcon {
+	position: fixed;
+	left: 50%;
+	bottom: 2%;
+	width: 50px;
+	margin-left: -25px;
+}
+
+
+/*二级页面*/
+
+.modelChoose {
+	width: 100%;
+	background: #000000;
+	color: #FFFFFF;
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	clear: both;
+	display: none;
+}
+
+.modelChoose ul {
+	padding: 0;
+	margin: 0;
+	width: 100%;
+}
+
+.modelChoose li {
+	height: 50px;
+	border-bottom: 1px solid #FFFFFF;
+	padding: 0 10%;
+}
+
+.modelChoose li a {
+	display: block;
+	color: #FFFFFF;
+}
+
+.modelChoose li a img {
+	vertical-align: middle;
+	margin-right: 10px;
+}
+
+.modelChoose li a span {
+	display: inline-block;
+	line-height: 49px;
+	font-size: 16px;
+}
+
+
+/*图书搜索列表页面*/
+
+.Seach_Htitle {
+	left: 40px;
+	right: 40px;
+	display: inline-block;
+	overflow: hidden;
+	width: auto;
+	margin: 0;
+	text-overflow: ellipsis;
+	position: absolute;
+}
+
+.Seach_Cready {
+	position: absolute;
+	right: 15px;
+	bottom: 5px;
+}
+
+.animated {
+	-webkit-animation-duration: 0.5s;
+	animation-duration: 0.5s;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+}
+
+@-webkit-keyframes bounceInDown {
+	0%,
+	60%,
+	75%,
+	90%,
+	100% {
+		-webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+		transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+	}
+	0% {
+		opacity: 0;
+		-webkit-transform: translate3d(0, -100%, 0);
+		transform: translate3d(0, -100%, 0);
+	}
+	60% {
+		opacity: 1;
+		-webkit-transform: translate3d(0, 25px, 0);
+		transform: translate3d(0, 25px, 0);
+	}
+	75% {
+		-webkit-transform: translate3d(0, -10px, 0);
+		transform: translate3d(0, -10px, 0);
+	}
+	90% {
+		-webkit-transform: translate3d(0, 5px, 0);
+		transform: translate3d(0, 5px, 0);
+	}
+	100% {
+		-webkit-transform: none;
+		transform: none;
+	}
+}
+
+@keyframes bounceInDown {
+	0%,
+	60%,
+	75%,
+	90%,
+	100% {
+		-webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+		transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+	}
+	0% {
+		opacity: 0;
+		-webkit-transform: translate3d(0, -100%, 0);
+		transform: translate3d(0, -100%, 0);
+	}
+	60% {
+		opacity: 1;
+		-webkit-transform: translate3d(0, 25px, 0);
+		transform: translate3d(0, 25px, 0);
+	}
+	75% {
+		-webkit-transform: translate3d(0, -10px, 0);
+		transform: translate3d(0, -10px, 0);
+	}
+	90% {
+		-webkit-transform: translate3d(0, 5px, 0);
+		transform: translate3d(0, 5px, 0);
+	}
+	100% {
+		-webkit-transform: none;
+		transform: none;
+	}
+}
+
+.bounce-in-down {
+	-webkit-animation-name: bounceInDown;
+	animation-name: bounceInDown;
+}
+
+@-webkit-keyframes fadeInDown {
+	0%,
+	60%,
+	75%,
+	90%,
+	100% {
+		-webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+		transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+	}
+	0% {
+		opacity: 0;
+		-webkit-transform: translate3d(0, -100%, 0);
+		transform: translate3d(0, -100%, 0);
+	}
+	60% {
+		opacity: 1;
+		-webkit-transform: translate3d(0, 0px, 0);
+		transform: translate3d(0, 0px, 0);
+	}
+	75% {
+		-webkit-transform: translate3d(0, 0px, 0);
+		transform: translate3d(0, 0px, 0);
+	}
+	90% {
+		-webkit-transform: translate3d(0, 0px, 0);
+		transform: translate3d(0, 0px, 0);
+	}
+	100% {
+		-webkit-transform: none;
+		transform: none;
+	}
+}
+
+@keyframes fadeInDown {
+	0%,
+	60%,
+	75%,
+	90%,
+	100% {
+		-webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+		transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+	}
+	0% {
+		opacity: 0;
+		-webkit-transform: translate3d(0, -100%, 0);
+		transform: translate3d(0, -100%, 0);
+	}
+	60% {
+		opacity: 1;
+		-webkit-transform: translate3d(0, 0px, 0);
+		transform: translate3d(0, 0px, 0);
+	}
+	75% {
+		-webkit-transform: translate3d(0, 0px, 0);
+		transform: translate3d(0, 0px, 0);
+	}
+	90% {
+		-webkit-transform: translate3d(0, 0px, 0);
+		transform: translate3d(0, 0px, 0);
+	}
+	100% {
+		-webkit-transform: none;
+		transform: none;
+	}
+}
+
+.fade-in-down {
+	-webkit-animation-name: fadeInDown;
+	animation-name: fadeInDown;
+}
+
+@-webkit-keyframes bounceOutUp {
+	20% {
+		-webkit-transform: translate3d(0, -10px, 0);
+		transform: translate3d(0, -10px, 0);
+	}
+	40%,
+	45% {
+		opacity: 1;
+		-webkit-transform: translate3d(0, 20px, 0);
+		transform: translate3d(0, 20px, 0);
+	}
+	100% {
+		opacity: 0;
+		-webkit-transform: translate3d(0, -100%, 0);
+		transform: translate3d(0, -100%, 0);
+	}
+}
+
+@keyframes bounceOutUp {
+	20% {
+		-webkit-transform: translate3d(0, -10px, 0);
+		transform: translate3d(0, -10px, 0);
+	}
+	40%,
+	45% {
+		opacity: 1;
+		-webkit-transform: translate3d(0, 20px, 0);
+		transform: translate3d(0, 20px, 0);
+	}
+	100% {
+		opacity: 0;
+		-webkit-transform: translate3d(0, -100%, 0);
+		transform: translate3d(0, -100%, 0);
+	}
+}
+
+.bounce-out-up {
+	-webkit-animation-name: bounceOutUp;
+	animation-name: bounceOutUp;
+}
+
+@-webkit-keyframes fadeOutUp {
+	20% {
+		-webkit-transform: translate3d(0, 0px, 0);
+		transform: translate3d(0, 0px, 0);
+	}
+	40%,
+	45% {
+		opacity: 1;
+		-webkit-transform: translate3d(0, 0px, 0);
+		transform: translate3d(0, 0px, 0);
+	}
+	100% {
+		opacity: 0;
+		-webkit-transform: translate3d(0, -100%, 0);
+		transform: translate3d(0, -100%, 0);
+	}
+}
+
+@keyframes fadeOutUp {
+	20% {
+		-webkit-transform: translate3d(0, 0px, 0);
+		transform: translate3d(0, 0px, 0);
+	}
+	40%,
+	45% {
+		opacity: 1;
+		-webkit-transform: translate3d(0, 0px, 0);
+		transform: translate3d(0, 0px, 0);
+	}
+	100% {
+		opacity: 0;
+		-webkit-transform: translate3d(0, -100%, 0);
+		transform: translate3d(0, -100%, 0);
+	}
+}
+
+.fade-out-up {
+	-webkit-animation-name: fadeOutUp;
+	animation-name: fadeOutUp;
+}
+
+.menu-open {
+	height: 100%;
+	width: 100%;
+}
+
+.menu-open .mui-scroll-wrapper {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	z-index: 1;
+	width: 100%;
+	overflow: hidden;
+	-webkit-backface-visibility: hidden;
+}
+
+.menu-backdrop {
+	display: none;
+}
+
+.menu-open .menu-backdrop {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	height: 100%;
+	width: 100%;
+	display: block;
+	z-index: 998;
+}
+
+.menu-wrapper {
+	position: fixed;
+	bottom: 0px;
+	left: 0;
+	right: 0;
+	z-index: 999;
+	text-align: center;
+	background-color: #333;
+	width: 100%;
+}
+
+.menu-wrapper.hidden {
+	display: none;
+}
+
+.menu {
+	width: 100%;
+}
+
+.menu .mui-table-view-inverted {
+	color: #FFFFFF;
+	font-size: 18px;
+}
+.menu-wrapper.mui-active,
+.menu-wrapper.mui-active .menu {
+	-webkit-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+}
+.icon_add{position: fixed;right: 15px;bottom: 30%;}
+.icon_add #icon-plus span{font-size: 50px;color: #EC971F;}
+
+
+
+/*图书阅读*/
+.book-reading{background: transparent;} 

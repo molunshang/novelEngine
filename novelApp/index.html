@@ -5,14 +5,22 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title></title>
-		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="css/mui.min.css" />
+		<link rel="stylesheet" href="css/publicStyle.css" />
+		<link rel="stylesheet" href="css/index.css" />
 		<script src="js/plugins/mui.min.js"></script>
+		<script type="text/javascript" src="js/plugins/jquery-1.12.4.min.js"></script>
+		<script type="text/javascript" src="js/api.js"></script>
 	</head>
 
 	<body>
-		<header id="header" class="mui-bar mui-bar-nav">
-			<div class="mui-input-row mui-search">
-				<input id="search" type="search" class="mui-input-clear" placeholder="">
+		<header id="index-header" class="mui-bar mui-bar-nav bgECECEC">
+			<a class="mui-action-back mui-icon mui-icon-back mui-pull-left"></a>
+			<a id="offCanvasBtn" href="#offCanvasSide" class="mui-icon mui-action-menu mui-icon-bars mui-pull-right"></a>
+			<div class="mui-content-padded Seach_Htitle">
+				<div class="mui-input-row mui-search">
+					<input id="searchbtn" type="search" class="mui-input-clear" placeholder="" style="background: #FFFFFF;">
+				</div>
 			</div>
 		</header>
 		<div class="mui-content"></div>
@@ -23,15 +31,44 @@
 			gestureConfig: {
 				doubletap: true
 			},
+			preloadPages: [{
+				"id": "search",
+				"url": "search.html",
+				"styles": {
+					"popGesture": "hide"
+				}
+			}],
 			subpages: [{
 				url: 'list.html',
-				id: 'list.html',
+				id: 'list',
 				styles: {
 					top: '45px',
 					bottom: '0px',
 				}
 			}]
 		});
+
+		function initApp() {
+			api.getConfig().done(function(res) {
+				console.log(res);
+			});
+			var searchView;
+			mui("#index-header").on("tap", "#searchbtn", function() {
+				if (!searchView) {
+					searchView = plus.webview.getWebviewById("search");
+				}
+				searchView.show();
+			});
+		}
+		if (mui.os.plus) {
+			mui.plusReady(function() {
+				initApp();
+			});
+		} else {
+			mui.ready(function() {
+				initApp();
+			});
+		}
 	</script>
 
 </html>

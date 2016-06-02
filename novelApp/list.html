@@ -9,22 +9,56 @@
 		<link rel="stylesheet" href="css/publicStyle.css" />
 		<link rel="stylesheet" href="css/index.css" />
 		<script src="js/plugins/mui.min.js"></script>
-		<script type="text/javascript" src="js/plugins/jquery-1.12.4.min.js"></script>		
+		<script type="text/javascript" src="js/plugins/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="js/plugins/react.js"></script>
 		<script type="text/javascript" src="js/plugins/react-dom.min.js"></script>
-		<!--<script type="text/javascript" src="js/config.js"></script>-->
 		<script type="text/javascript" src="js/models.js"></script>
 		<script type="text/javascript" src="js/api.js"></script>
-		<script type="text/javascript" src="js/appView.js"></script>
+		<script type="text/javascript" src="js/indexView.js"></script>
 	</head>
 
 	<body>
 		<!--下拉刷新容器-->
+		<!--<div  id="content" class="mui-content">
+		</div>-->
 		<div id="pullrefresh" class="mui-content mui-scroll-wrapper">
 			<div id="content" class="mainmenu mui-scroll">
 				<!--数据列表-->
 			</div>
 		</div>
+		<script type="application/javascript">
+			function pulldownRefresh() {
+				setTimeout(function() {
+					api.getLocalBooks().done(function(data) {
+						var dom = ReactDOM.render(React.createElement(List, {
+							data: data.data
+						}), document.getElementById('content'));
+						console.log(dom);
+					}).always(function() {
+						mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
+					});
+				}, 1500);
+			};
+			mui.init({
+				pullRefresh: {
+					container: '#pullrefresh',
+					down: {
+						callback: pulldownRefresh
+					}
+				}
+			});
+			if (mui.os.plus) {
+				mui.plusReady(function() {
+					setTimeout(function() {
+						mui('#pullrefresh').pullRefresh().pulldownLoading();
+					}, 1000);
+				});
+			} else {
+				mui.ready(function() {
+					mui('#pullrefresh').pullRefresh().pulldownLoading();
+				});
+			}
+		</script>
 	</body>
 
 </html>
