@@ -7,7 +7,7 @@ api = blueprints.Blueprint("api", __name__)
 
 @api.route('/search/<name>')
 def search(name):
-    result = bookDb.Book.find({"BookName": name});
+    result = bookDb.Book.find({"BookName": {"$regex": "^(" + name + ")"}});
     return jsonify(isok=True, data=toArray(result));
 
 

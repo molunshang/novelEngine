@@ -12,8 +12,8 @@ var Item = React.createClass({
 		}
 		this.saveToLocal();
 	},
-	saveToLocal: function() {		
-		//api.setNewRead(book._id);
+	saveToLocal: function() {
+		api.setNewRead(this.props.data._id);
 		this.props.onSaveLocal(this.props.data);
 	},
 	render: function() {
@@ -37,9 +37,9 @@ var Item = React.createClass({
 				book.Icon || 'images/nocover.jpg'
 			}
 			style = {
-				{
-					maxHeight: '125px',
-					maxWidth: '100px'
+				{					
+					maxWidth: '100px',
+					maxHeight: '125px'
 				}
 			}
 			/> < div className = "mui-media-body" > {
@@ -67,6 +67,12 @@ var List = React.createClass({
 					data: [book].concat(books)
 				});
 			},
+			refresh: function(data) {
+				var list = data || this.state.data;
+				this.setState({
+					data: list
+				});
+			},
 			render: function() {
 				var listViews = this.state.data.map(function(book) {
 						return ( < Item key = {
@@ -89,8 +95,8 @@ var List = React.createClass({
 						src = "images/addbook.png"
 						style = {
 							{
-								maxHeight: '125px',
-								maxWidth: '100px'
+								minHeight: '125px',
+								minWidth: '100px'
 							}
 						}
 						/> < div className = "mui-media-body" > 添加图书 < /div > < /a > < /li > < /ul > );

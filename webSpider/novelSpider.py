@@ -196,10 +196,10 @@ class novelSpider(spider):
         title = re.search(titleRex, html);
         if not title:
             return None;
-        title = title.group(1) or title.group(2)
+        title = (title.group(1) or title.group(2)).strip()
         author = re.search(authorRex, html);
         if author:
-            author = author.group(1) or author.group(2)
+            author = (author.group(1) or author.group(2)).strip()
         else:
             author = "";
         icon = re.search(iconRex, html);

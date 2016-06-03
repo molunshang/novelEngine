@@ -38,6 +38,15 @@ def siteItem():
     return redirect(url_for("siteItem"));
 
 
+@app.after_request
+def makecross(response):
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Methods'] = 'PUT,GET,POST,DELETE'
+    allow_headers = "Referer,Accept,Origin,User-Agent"
+    response.headers['Access-Control-Allow-Headers'] = allow_headers
+    return response
+
+
 if __name__ == '__main__':
     app.debug = True;
     app.run(host='0.0.0.0')

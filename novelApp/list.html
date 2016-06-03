@@ -27,17 +27,22 @@
 			</div>
 		</div>
 		<script type="application/javascript">
+			var reactList;
+
 			function pulldownRefresh() {
 				setTimeout(function() {
-					api.getLocalBooks().done(function(data) {
-						var dom = ReactDOM.render(React.createElement(List, {
-							data: data.data
-						}), document.getElementById('content'));
-						console.log(dom);
+					api.getLocalBooks().done(function(data) {						
+						if (reactList) {
+							reactList.refresh(data);
+						} else {
+							reactList = ReactDOM.render(React.createElement(List, {
+								data: data
+							}), document.getElementById('content'));
+						}						
 					}).always(function() {
 						mui('#pullrefresh').pullRefresh().endPulldownToRefresh(); //refresh completed
 					});
-				}, 1500);
+				}, 500);
 			};
 			mui.init({
 				pullRefresh: {
@@ -46,12 +51,10 @@
 						callback: pulldownRefresh
 					}
 				}
-			});
+			});			
 			if (mui.os.plus) {
 				mui.plusReady(function() {
-					setTimeout(function() {
-						mui('#pullrefresh').pullRefresh().pulldownLoading();
-					}, 1000);
+					mui('#pullrefresh').pullRefresh().pulldownLoading();
 				});
 			} else {
 				mui.ready(function() {

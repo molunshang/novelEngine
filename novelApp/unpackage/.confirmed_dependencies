@@ -1,42 +1,65 @@
 {
-	"index.html": {
-		"resources": [
-			"js/app.js",
-			"js/mui.min.js",
-			"fonts/mui.ttf",
-			"css/mui.min.css",
-			"js/config.js",
-			"/images/nocover.jpg",
-			"images/nocover.jpg",
-			"list.html",
-			"js/mui.js"
-		],
-		"refer": [
-			"list.html",
-			"search.html"
-		]
-	},
-	"list.html": {
-		"resources": [
-			"js/app.js",
-			"js/config.js",
-			"images/nocover.jpg",
-			"js/mui.min.js",
-			"css/mui.min.css",
-			"js/appView.js",
-			"js/react.min.js",
-			"js/react-dom.min.js",
-			"js/react-dom.js",
-			"js/react.js",
-			"js/browser.min.js",
-			"1.json",
-			"css/index.css",
-			"css/publicStyle.css"
-		]
-	},
-	"search.html": {
-		"resources": [
-			"images/nocover.jpg"
-		]
-	}
+  "index.html": {
+    "resources": [
+      "js/app.js",
+      "js/mui.min.js",
+      "fonts/mui.ttf",
+      "css/mui.min.css",
+      "js/config.js",
+      "/images/nocover.jpg",
+      "images/nocover.jpg",
+      "list.html",
+      "js/mui.js",
+      "css/index.css",
+      "css/publicStyle.css",
+      "js/plugins/jquery-1.12.4.min.js",
+      "js/plugins/mui.min.js",
+      "js/api.js"
+    ],
+    "refer": [
+      "list.html",
+      "search.html"
+    ]
+  },
+  "list.html": {
+    "resources": [
+      "js/app.js",
+      "js/config.js",
+      "images/nocover.jpg",
+      "js/mui.min.js",
+      "css/mui.min.css",
+      "js/appView.js",
+      "js/react.min.js",
+      "js/react-dom.min.js",
+      "js/react-dom.js",
+      "js/react.js",
+      "js/browser.min.js",
+      "1.json",
+      "css/index.css",
+      "css/publicStyle.css",
+      "js/plugins/react.js",
+      "js/indexView.js",
+      "js/models.js",
+      "js/plugins/react-dom.min.js",
+      "images/addbook.png",
+      "js/plugins/jquery-1.12.4.min.js",
+      "js/plugins/mui.min.js",
+      "js/api.js"
+    ]
+  },
+  "search.html": {
+    "resources": [
+      "images/nocover.jpg",
+      "js/searchView.js",
+      "css/index.css",
+      "js/plugins/react.js",
+      "css/publicStyle.css",
+      "js/plugins/jquery-1.12.4.min.js",
+      "js/plugins/mui.min.js",
+      "css/mui.min.css",
+      "js/models.js",
+      "js/plugins/react-dom.min.js",
+      "js/api.js"
+    ]
+  }
 }

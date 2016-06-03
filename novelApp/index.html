@@ -32,10 +32,12 @@
 				doubletap: true
 			},
 			preloadPages: [{
-				"id": "search",
-				"url": "search.html",
-				"styles": {
-					"popGesture": "hide"
+				id: "search",
+				url: "search.html",
+				styles: {
+					popGesture: "hide",
+					top: '45px',
+					bottom: '0px',
 				}
 			}],
 			subpages: [{
@@ -49,15 +51,32 @@
 		});
 
 		function initApp() {
+			var dbTask = api.initDb();
 			api.getConfig().done(function(res) {
-				console.log(res);
+				if (res.isok) {
+					dbTask.done(function() {
+						api.createConfigs(res.data);
+					});
+				}
+			}).fail(function() {
+				mui.toast("网络连接错误，请稍后再试");
 			});
 			var searchView;
-			mui("#index-header").on("tap", "#searchbtn", function() {
-				if (!searchView) {
-					searchView = plus.webview.getWebviewById("search");
+			$("#searchbtn").focus(function() {
+				var flag = $(this).data("flag");
+				if (!flag) {
+					if (!searchView) {
+						if (typeof plus != "undefined") {
+							searchView = plus.webview.getWebviewById("search");
+						} else {
+							location.href = "search.html";
+						}
+					}
+					$(this).data("flag", true);
+					searchView.show("slide-in-right", 200);
+				} else {
+					$(this).data("flag", null);
 				}
-				searchView.show();
 			});
 		}
 		if (mui.os.plus) {

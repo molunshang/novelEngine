@@ -2,13 +2,7 @@ body {
 	font-size: 14px;
 }
 
-.mainmenu {
-	margin: 0px auto;
-	background: url(../images/5_line.jpg) repeat-y;
-	background-size: 100% auto;
-	display: block;
-	overflow: hidden;
-}
+.mainmenu {}
 
 .mainmenu .sc,
 body .mainmenu .gc,
@@ -411,15 +405,27 @@ body .mainmenu .bottom {
 	color: #FFFFFF;
 	font-size: 18px;
 }
+
 .menu-wrapper.mui-active,
 .menu-wrapper.mui-active .menu {
 	-webkit-transform: translate3d(0, 0, 0);
 	transform: translate3d(0, 0, 0);
 }
-.icon_add{position: fixed;right: 15px;bottom: 30%;}
-.icon_add #icon-plus span{font-size: 50px;color: #EC971F;}
 
+.icon_add {
+	position: fixed;
+	right: 15px;
+	bottom: 30%;
+}
+
+.icon_add #icon-plus span {
+	font-size: 50px;
+	color: #EC971F;
+}
 
 
 /*图书阅读*/
-.book-reading{background: transparent;} 
+
+.book-reading {
+	background: transparent;
+}

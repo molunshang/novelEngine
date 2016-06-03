@@ -1,7 +1,19 @@
 var SearchItem = React.createClass({
+	add: function() {
+		var book = this.props.data;
+		book.IsLocal = false;
+		console.log(JSON.stringify(book));
+		api.addToLocal(book).done(function() {
+			console.log("back");
+			mui.back();
+		});
+	},
 	render: function() {
 		var book = this.props.data;
-		return ( < li className = "mui-table-view-cell mui-media" >
+		return ( < li className = "mui-table-view-cell mui-media"
+				onClick = {
+					this.add
+				} >
 				< a href = "javascript:void(0)"
 				style = {
 					{
@@ -30,14 +42,7 @@ var SearchItem = React.createClass({
 }
 });
 var SearchList = React.createClass({
-		//		getInitialState: function() {
-		//			return {
-		//				data: this.props.data || []
-		//			};
-		//		},
 		render: function() {
-			console.log(JSON.stringify(this.props.data));
-			console.log(JSON.stringify(this.props));
 			var list = this.props.data || [];
 			var content = list.map(function(item) {
 					return ( < SearchItem key = {
@@ -56,9 +61,11 @@ var SearchList = React.createClass({
 		});
 	var Header = React.createClass({
 		changeSearch: function(e) {
-			var name = e.target.value;
-			this.props.onSearchChange(name);
-		},
+			if (e.keyCode == 13) {
+				var name = e.target.value;
+				this.props.onSearchChange(name);
+			}
+		},		
 		render: function() {
 			return ( < header className = "mui-bar mui-bar-nav bgECECEC" >
 				< a className = "mui-action-back mui-icon mui-icon-back mui-pull-left" > < /a> < a id = "offCanvasBtn"
@@ -71,7 +78,7 @@ var SearchList = React.createClass({
 						background: "#FFFFFF"
 					}
 				}
-				onChange = {
+				onKeyUp = {
 					this.changeSearch
 				}
 				/> < /div > < /div > < /header > );
