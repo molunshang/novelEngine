@@ -82,32 +82,45 @@ class novelSpider(spider):
         '''
         格式化列表
         '''
+        canBreak = self.paresInfo(html, config, linkItem);
+        if canBreak:
+            return;
+        self.parseList(html, config, linkItem);
+
+    def parseList(self, html, config, linkItem):
         dataItem = copy.deepcopy(linkItem);
         host = linkItem["host"];
+        preLink = linkItem["link"];
         regItem = config["list"];
-        reg = regItem["regex"];
-        time = config["time"];
         linkType = regItem["type"];
+        reg = regItem["regex"];
         links = re.findall(reg, html);
-        lastTime = redisClient.get("lastTime_" + host);
-        if not lastTime:
-            lastTime = config["lastTime"];
-        elif not isinstance(lastTime, str):
-            lastTime = lastTime.decode("utf-8");
         if links:
             for l in set(links):
-                nl = self.convertLink(host, l, link, linkType);
+                nl = self.convertLink(host, l, preLink, linkType);
                 if nl:
                     dataItem["link"] = nl;
                     dataItem["linktype"] = linkType;
                     if not self.filter(dataItem):
                         self.queue.enqueue(dataItem);
+
+    def paresInfo(self, html, config, linkItem):
+        dataItem = copy.deepcopy(linkItem);
+        listFlag = True;
+        host = linkItem["host"];
         regItem = config["detail"];
+        time = config["time"];
+        preLink = linkItem["link"];
+        lastTime = redisClient.get("lastTime_" + host);
+        if not lastTime:
+            lastTime = config["lastTime"];
+        elif not isinstance(lastTime, str):
+            lastTime = lastTime.decode("utf-8");
         linkType = regItem["type"];
         times = re.findall(time, html);
         details = set(re.findall(regItem["regex"], html));
         if (not details or len(details) <= 0) or (not times or len(times) <= 0):
-            return;
+            return False;
         if details:
             timeLastIndex = len(times) - 1;
             index = 0;
@@ -115,13 +128,15 @@ class novelSpider(spider):
                 dataItem["partitionFlag"] = times[min(index, timeLastIndex)];
                 if dataItem["partitionFlag"] < lastTime:
                     continue;
+                listFlag = False;
                 index = index + 1;
-                nl = self.convertLink(host, l, link, linkType);
+                nl = self.convertLink(host, l, preLink, linkType);
                 if nl:
                     dataItem["link"] = nl;
                     dataItem["linktype"] = linkType;
                     if not self.filter(dataItem):
                         self.queue.enqueue(dataItem);
+        return listFlag;
 
     @asyncio.coroutine
     def parseContent(self, html, config, linkItem):

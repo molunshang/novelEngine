@@ -1,7 +1,5 @@
 from flask import *;
 from flask_bootstrap import Bootstrap;
-from pymongo import mongo_client;
-from AsyncBaseSpider import redisQueue;
 from config import *;
 import forms;
 import api;
