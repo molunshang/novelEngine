@@ -1,4 +1,5 @@
-from multiprocessing import Pool;
+from multiprocessing import Pool, Process;
+import threading;
 import asyncio
 import link;
 import os
@@ -16,7 +17,6 @@ class novelSpider(spider):
         self.expireKeys = set();
         self.sequenceName = "SeqSpider_" + link.host;
         self.sequence = str(self.getTaskSequence());
-        self.bookDict = globalBookDict;
         queue = redisQueue("linkQueue_" + link.host);
         queue.enqueue({"link": link.link, "host": link.host, "linktype": link.type, "partitionFlag": self.sequence});
         if loop is None:
@@ -220,7 +220,11 @@ class novelSpider(spider):
         icon = re.search(iconRex, html);
         if icon:
             icon = icon.group(0);
-        info = self.bookDict.get(title);
+        infoKey = "book:" + title + "_" + author;
+        info = self.redisClient.get(infoKey);
+        if info is not None:
+            info = eval(info);
+        change = False;
         if not info:
             seq = yield from client["book"].GlobalSequence.find_and_modify({"SequenceName": "BookId"},
                                                                            {"$inc": {"SequenceValue": 1}}, True);
@@ -230,10 +234,13 @@ class novelSpider(spider):
                                                                   "$setOnInsert": {"_id": bookId}}, True, new=True);
             bookId = res["_id"];
             info = {"bookId": bookId, "icon": icon}
+            change = True;
         elif not info["icon"] and icon and len(icon) > 0:
             yield from client["book"].Book.update({"_id": info["bookId"]}, {"$set": {"Icon": icon}});
             info["icon"] = icon;
-        self.bookDict[title] = info;
+            change = True;
+        if change:
+            self.redisClient.set(infoKey, info, ex=60 * 3);
         return title, info;
 
 
@@ -245,15 +252,30 @@ def runSpider(link):
     redisClient.set("lastTime_" + link.host, now);
 
 
-if __name__ == "__main__":
+def run():
     poolSize = min(len(configs), os.cpu_count());
     p = Pool(processes=poolSize);
     for l in [link.link(k, 1, k) for k in configs]:
         p.apply_async(runSpider, args=(l,));
+    p.close();
+    p.join();
+
+
+def watch():
     siteQueue = redisQueue("spiderSite");
     while 1:
         site = siteQueue.blockDequeue();
         if site is not None:
             addSiteConfig(site);
             l = link.link(site["_id"], 1, site["_id"]);
-            p.apply_async(link, args=(l,));
+            p = Process(target=runSpider, args=(l,));
+            p.start();
+
+
+if __name__ == "__main__":
+    t = threading.Thread(target=watch);
+    t.start();
+    while True:
+        run();
+        print("抓取结束");
+        time.sleep(60 * 60 * 3);

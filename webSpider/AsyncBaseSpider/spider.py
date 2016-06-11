@@ -15,9 +15,9 @@ class spider(object):
         self.concurrent = concurrentCount;
 
     @asyncio.coroutine
-    def get(self, url):
+    def get(self, url, out=None):
         with aiohttp.ClientSession(loop=self.loop, headers=self.requestHeader) as session:
-            with aiohttp.Timeout(20):
+            with aiohttp.Timeout(10 if out is None else out):
                 response = yield from session.get(url);
                 result = yield from response.read();
                 response.close();
@@ -42,11 +42,15 @@ class spider(object):
                     return;
                 if self.filter(item):
                     continue;
-                data = yield from self.get(item["link"]);
+                timeOut = item["timeout"] if "timeout" in item else 1;
+                data = yield from self.get(item["link"], timeOut * 10);
                 if data[0] == 200:
                     yield from self.parse(data[1], item);
                     self.record(item);
             except Exception as ex:
+                if ex is TimeoutError:
+                    outTimes = (item["timeout"] if "timeout" in item else 1) + 1;
+                    item["timeout"] = outTimes;
                 self.queue.enqueue(item);
                 print("错误信息:%s，链接:%s" % (ex, item));
 
