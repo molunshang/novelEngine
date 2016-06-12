@@ -235,7 +235,7 @@ class novelSpider(spider):
             bookId = res["_id"];
             info = {"bookId": bookId, "icon": icon}
             change = True;
-        elif not info["icon"] and icon and len(icon) > 0:
+        elif (not info["icon"] or info["icon"] is None) and icon and len(icon) > 0:
             yield from client["book"].Book.update({"_id": info["bookId"]}, {"$set": {"Icon": icon}});
             info["icon"] = icon;
             change = True;
