@@ -1,6 +1,7 @@
 from flask import blueprints, jsonify, request
 from time import time;
 from config import *;
+from builtins import list as array;
 
 api = blueprints.Blueprint("api", __name__)
 
@@ -11,7 +12,7 @@ def search(name):
     return jsonify(isok=True, data=toArray(result));
 
 
-@api.route('/newbooklist/<float:searchtime>')
+@api.route('/newbooklist/<float:searchtime>', methods=["get", "post"])
 def getNewItem(searchtime):
     searchtime = float(searchtime);
     if "books" not in request.form:
@@ -22,7 +23,7 @@ def getNewItem(searchtime):
     bookArray = books.split(",");
     if len(bookArray) <= 0:
         return jsonify(isok=False, msg="参数错误")
-    bookArray = map(lambda id: int(id), bookArray);
+    bookArray = array(map(lambda id: int(id), bookArray));
     result = bookDb.BookLinks.find({"BookId": {"$in": bookArray}, "Time": {"$gte": searchtime}});
     return jsonify(isok=True, data=toArray(result), serverTime=time());
 
