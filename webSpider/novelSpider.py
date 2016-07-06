@@ -17,6 +17,11 @@ class novelSpider(spider):
         self.expireKeys = set();
         self.sequenceName = "SeqSpider_" + link.host;
         self.sequence = str(self.getTaskSequence());
+        self.lastTime = redisClient.get("lastTime_" + link.host);
+        if not self.lastTime:
+            self.lastTime = configs[link.host]["lastTime"];
+        elif not isinstance(self.lastTime, str):
+            self.lastTime = self.lastTime.decode("utf-8");
         queue = redisQueue("linkQueue_" + link.host);
         queue.enqueue({"link": link.link, "host": link.host, "linktype": link.type, "partitionFlag": self.sequence});
         if loop is None:
@@ -58,7 +63,10 @@ class novelSpider(spider):
     def record(self, item):
         recordName = "record_" + item["host"] + "_" + item["partitionFlag"];
         self.expireKeys.add(recordName);
-        redisClient.sadd(recordName, item["link"]);
+        pipe = redisClient.pipeline();
+        pipe.sadd(recordName, item["link"]);
+        pipe.expire(recordName, 3600 * 12);
+        pipe.execute();
 
     @asyncio.coroutine
     def parse(self, data, item):
@@ -111,11 +119,7 @@ class novelSpider(spider):
         regItem = config["detail"];
         time = config["time"];
         preLink = linkItem["link"];
-        lastTime = redisClient.get("lastTime_" + host);
-        if not lastTime:
-            lastTime = config["lastTime"];
-        elif not isinstance(lastTime, str):
-            lastTime = lastTime.decode("utf-8");
+        lastTime = self.lastTime;
         linkType = regItem["type"];
         times = re.findall(time, html);
         details = set(re.findall(regItem["regex"], html));
@@ -244,12 +248,19 @@ class novelSpider(spider):
         return title, info;
 
 
-def runSpider(link):
-    reader = novelSpider(link);
+def runSpider(url):
+    reader = novelSpider(url);
     reader.run();
     reader.closeTransaction();
     now = time.strftime('%y-%m-%d', time.localtime(time.time()));
-    redisClient.set("lastTime_" + link.host, now);
+    redisClient.set("lastTime_" + url.host, now);
+    redisClient.srem("runingQueue", url.host);
+    host = redisClient.spop("runingQueue");
+    if host is None:
+        return;
+    host = host.decode("utf-8");
+    url = link.link(host, 1, host);
+    runSpider(url);
 
 
 def run():
@@ -257,6 +268,7 @@ def run():
     p = Pool(processes=poolSize);
     for l in [link.link(k, 1, k) for k in configs]:
         p.apply_async(runSpider, args=(l,));
+    redisClient.sadd("runingQueue", *list(configs.keys()));
     p.close();
     p.join();
 
@@ -273,9 +285,13 @@ def watch():
 
 
 if __name__ == "__main__":
+    print("进程Id:%d", os.getpid());
     t = threading.Thread(target=watch);
     t.start();
     while True:
-        run();
-        print("抓取结束");
+        try:
+            run();
+        except Exception as ex:
+            print("异常类型:%s,消息：%s" % (type(ex), ex));
+        print("%s抓取结束" % time.ctime());
         time.sleep(60 * 60 * 3);

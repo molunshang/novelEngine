@@ -35,24 +35,27 @@ class spider(object):
 
     @asyncio.coroutine
     def craw(self):
-        while True:
-            try:
-                item = self.queue.dequeue();
-                if item is None:
-                    return;
-                if self.filter(item):
-                    continue;
-                timeOut = item["timeout"] if "timeout" in item else 1;
-                data = yield from self.get(item["link"], timeOut * 10);
-                if data[0] == 200:
-                    yield from self.parse(data[1], item);
-                    self.record(item);
-            except Exception as ex:
-                if ex is TimeoutError:
-                    outTimes = (item["timeout"] if "timeout" in item else 1) + 1;
-                    item["timeout"] = outTimes;
-                self.queue.enqueue(item);
-                print("错误信息:%s，链接:%s" % (ex, item));
+        try:
+            while True:
+                try:
+                    item = self.queue.dequeue();
+                    if item is None:
+                        return;
+                    if self.filter(item):
+                        continue;
+                    timeOut = item["timeout"] if "timeout" in item else 1;
+                    data = yield from self.get(item["link"], timeOut * 10);
+                    if data[0] == 200:
+                        yield from self.parse(data[1], item);
+                        self.record(item);
+                except Exception as ex:
+                    if ex is TimeoutError:
+                        outTimes = (item["timeout"] if "timeout" in item else 1) + 1;
+                        item["timeout"] = outTimes;
+                    self.queue.enqueue(item);
+                    print("错误类型:%s,错误信息:%s，链接:%s" % (type(ex), ex, item));
+        except Exception as ex:
+            print("错误信息:%s" % ex);
 
     def run(self):
         tasks = [self.craw() for i in range(self.concurrent)];
